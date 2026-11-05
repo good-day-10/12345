@@ -2,45 +2,11 @@
 // 程式大選修 - 主程式
 // 已套用：P0-2 / P0-3 / P0-4 / P0-5 / P0-7 / P0-8 / P0-9
 //        P1-2 / P1-3 / P1-5 / P1-7 / P1-8 / P1-9 / P1-10
-// 作品總數：8（原 4 + 新增 4）
+// 作品總數：4（已移除前 4 張外鏈佔位符）
 // ============================================
 
 const projectsData = [
-    // ───── 原有 4 件 ─────
-    {
-        title: "墨韻：數位書法展示網頁",
-        author: "徐愷、陳朝元",
-        category: "site",
-        tag: "展示網站",
-        image: "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=800&q=80",
-        description: "《墨韻》這項作品結合了 HTML5 Canvas 畫布技術與動態演算法，精細模擬毛筆的水墨濃淡、擴散與飛白筆觸效果。使用者可以在數位平台上揮毫創作，感受東方傳統書法的寫意之美與當代資訊科技的交融。"
-    },
-    {
-        title: "智生活：AI 學習進度規劃器",
-        author: "Pig、殷睿紳",
-        category: "tool",
-        tag: "生活工具",
-        image: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=800&q=80",
-        description: "《智生活》是一款專為學生設計的自主學習輔助工具。整合生成式 AI 與目標分解演算法，協助學生根據個人考程與學習進度自動調整每日讀書計畫，並具備即時專注計時與學習成就圖表回饋。"
-    },
-    {
-        title: "鐘樓迴響：復古風時空解謎",
-        author: "李昊恩、小蝎",
-        category: "game",
-        tag: "趣味遊戲",
-        image: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=800&q=80",
-        description: "《鐘樓迴響》是一副採用古典雙色像素風格打造的解謎遊戲。玩家將扮演掌控時間與空間鑰匙的探險家，在悠揚的古典交響樂與時鐘滴答聲中，解開層層機關，探索古老鐘樓背後被封印的秘密。"
-    },
-    {
-        title: "光雕大冒險：聲控彈珠臺",
-        author: "李宥嫻",
-        category: "game",
-        tag: "趣味遊戲",
-        image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80",
-        description: "《光雕大冒險》運用裝置麥克風音量偵測與物理引擎碰撞技術，創作出新型態的聲控彈珠遊戲。玩家不僅能利用按鈕發射，還能對著麥克風吶喊發聲，給予彈珠瞬間的加速與光雕特效推進！"
-    },
-
-    // ───── 新增 4 件（作品 5-8，data-idx 對應 4-7） ─────
+    // 作品 1 - data-idx="0"
     {
         title: "圖文日曆：視覺化事件記錄",
         author: "Pig",
@@ -49,6 +15,7 @@ const projectsData = [
         image: "images/calendar.webp",
         description: "這是一個結合圖片與日曆的事件記錄工具。除了月曆檢視，你可以為任何一天新增事件，填寫標題、日期、全天或特定時間段、描述，並上傳一張代表圖片。無論是生日、旅行、紀念日，或想記下某個特別瞬間，都能用圖片讓日曆更有溫度。表單設計直覺，適合喜歡用視覺方式整理生活的人。"
     },
+    // 作品 2 - data-idx="1"
     {
         title: "Payas Days：簡約日曆",
         author: "Pig",
@@ -57,6 +24,7 @@ const projectsData = [
         image: "images/calendar.webp",
         description: "Payas Days 專注於最核心的日曆體驗：清楚呈現每個月的日期排列，標示星期與今天的位置。頁面提供「點擊前往今天」的快捷功能，讓你無論瀏覽到哪個月，都能一鍵返回當前日期。沒有多餘裝飾或複雜操作，適合喜歡極簡風格、只需要快速確認日期與規劃行程的使用者。"
     },
+    // 作品 3 - data-idx="2"
     {
         title: "Turtle Planner：每日任務規劃",
         author: "Pig",
@@ -65,6 +33,7 @@ const projectsData = [
         image: "images/planner.webp",
         description: "Turtle Planner 圍繞「今天要完成什麼？」設計。你可以新增多項任務，為每項填寫任務內容、選擇分類、指定地點，並設定開始時間、結束時間與預計時長。當一天規劃完成後，可以將清單鎖定，避免臨時更動。內建統計後台會顯示完成率總覽，幫助你回顧每日目標的達成情況，適合需要結構化安排一天行程的使用者。"
     },
+    // 作品 4 - data-idx="3"
     {
         title: "多功能計時器：正計時與倒計時",
         author: "Pig",
