@@ -2,10 +2,11 @@
 // 程式大選修 - 主程式
 // 已套用：P0-2 / P0-3 / P0-4 / P0-5 / P0-7 / P0-8 / P0-9
 //        P1-2 / P1-3 / P1-5 / P1-7 / P1-8 / P1-9 / P1-10
-// （P0-1 在 style.css；P0-6 在 index.html）
+// 作品總數：8（原 4 + 新增 4）
 // ============================================
 
 const projectsData = [
+    // ───── 原有 4 件 ─────
     {
         title: "墨韻：數位書法展示網頁",
         author: "徐愷、陳朝元",
@@ -37,13 +38,47 @@ const projectsData = [
         tag: "趣味遊戲",
         image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80",
         description: "《光雕大冒險》運用裝置麥克風音量偵測與物理引擎碰撞技術，創作出新型態的聲控彈珠遊戲。玩家不僅能利用按鈕發射，還能對著麥克風吶喊發聲，給予彈珠瞬間的加速與光雕特效推進！"
+    },
+
+    // ───── 新增 4 件（作品 5-8，data-idx 對應 4-7） ─────
+    {
+        title: "圖文日曆：視覺化事件記錄",
+        author: "Pig",
+        category: "tool",
+        tag: "生活工具",
+        image: "images/calendar.webp",
+        description: "這是一個結合圖片與日曆的事件記錄工具。除了月曆檢視，你可以為任何一天新增事件，填寫標題、日期、全天或特定時間段、描述，並上傳一張代表圖片。無論是生日、旅行、紀念日，或想記下某個特別瞬間，都能用圖片讓日曆更有溫度。表單設計直覺，適合喜歡用視覺方式整理生活的人。"
+    },
+    {
+        title: "Payas Days：簡約日曆",
+        author: "Pig",
+        category: "tool",
+        tag: "生活工具",
+        image: "images/calendar.webp",
+        description: "Payas Days 專注於最核心的日曆體驗：清楚呈現每個月的日期排列，標示星期與今天的位置。頁面提供「點擊前往今天」的快捷功能，讓你無論瀏覽到哪個月，都能一鍵返回當前日期。沒有多餘裝飾或複雜操作，適合喜歡極簡風格、只需要快速確認日期與規劃行程的使用者。"
+    },
+    {
+        title: "Turtle Planner：每日任務規劃",
+        author: "Pig",
+        category: "tool",
+        tag: "生活工具",
+        image: "images/planner.webp",
+        description: "Turtle Planner 圍繞「今天要完成什麼？」設計。你可以新增多項任務，為每項填寫任務內容、選擇分類、指定地點，並設定開始時間、結束時間與預計時長。當一天規劃完成後，可以將清單鎖定，避免臨時更動。內建統計後台會顯示完成率總覽，幫助你回顧每日目標的達成情況，適合需要結構化安排一天行程的使用者。"
+    },
+    {
+        title: "多功能計時器：正計時與倒計時",
+        author: "Pig",
+        category: "tool",
+        tag: "生活工具",
+        image: "images/timer.webp",
+        description: "這是一個靈活的計時工具，提供「正計時」與「倒計時」兩種模式，並允許同時新增多個計時器，各自獨立運作。每個計時器都能開始、計次、重設，並以清晰數字顯示經過時間或剩餘時間。全螢幕模式讓時間數字更醒目，適合廚房烹飪、運動計時、工作專注等需要精準掌握時間的場景。"
     }
 ];
 
 let currentModalIndex = null;
 let currentUtterance = null;
 
-// P1-9：單一狀態機取代 isPaused + synth.paused 雙變數
+// P1-9：單一狀態機
 const SpeechState = { IDLE: 'idle', PLAYING: 'playing', PAUSED: 'paused' };
 let speechState = SpeechState.IDLE;
 
@@ -52,7 +87,7 @@ const synth = window.speechSynthesis || null;
 const speechAvailable = !!synth;
 
 // ============================================
-// P1-3 + P1-8：導覽渲染（桌面 + 行動端統一）
+// P1-3 + P1-8：導覽渲染
 // ============================================
 function renderNav(activePage) {
     ['home', 'projects', 'course'].forEach(p => {
@@ -73,7 +108,7 @@ function renderNav(activePage) {
 }
 
 // ============================================
-// P1-2：頁面切換（強制重播 fadeIn 動畫）
+// P1-2：頁面切換（強制重播 fadeIn）
 // ============================================
 function switchPage(pageId) {
     const pages = ['home', 'projects', 'course'];
@@ -83,7 +118,7 @@ function switchPage(pageId) {
         if (p === pageId) {
             pageEl.classList.remove('hidden');
             pageEl.classList.remove('page-transition');
-            void pageEl.offsetWidth; // 強制 reflow，讓 fadeIn 重播
+            void pageEl.offsetWidth;
             pageEl.classList.add('page-transition');
         } else {
             pageEl.classList.add('hidden');
@@ -113,7 +148,7 @@ function filterProjects(category) {
         btn.classList.toggle('border-land-gold', active);
         btn.classList.toggle('text-land-dark', !active);
         btn.classList.toggle('border-land-gold/30', !active);
-        btn.classList.toggle('hover:border-land-gold', !active); // P1-5
+        btn.classList.toggle('hover:border-land-gold', !active);
     });
 
     document.querySelectorAll('.project-card').forEach(card => {
@@ -145,7 +180,7 @@ function openProjectModal(index) {
     const modalEl = document.getElementById('project-modal');
     modalEl.classList.remove('hidden');
     document.body.style.overflow = 'hidden';
-    modalEl.focus(); // P1-10
+    modalEl.focus();
 }
 
 function closeProjectModal() {
@@ -155,7 +190,7 @@ function closeProjectModal() {
 }
 
 // ============================================
-// P1-7：組員提示卡（單例復用，不再疊加）
+// P1-7：組員提示卡（單例）
 // ============================================
 let memberToastEl = null;
 let memberToastTimer = null;
@@ -194,7 +229,6 @@ function startCurrentSpeech() {
     }
     if (currentModalIndex === null) return;
 
-    // 從暫停中恢復
     if (speechState === SpeechState.PAUSED) {
         synth.resume();
         return;
@@ -209,14 +243,12 @@ function startCurrentSpeech() {
     u.lang = 'zh-TW';
     u.rate = 0.95;
 
-    // P1-9：回呼裡檢查是否還是自己這條 utterance，避免 cancel 觸發的雜訊覆蓋狀態
     u.onstart = () => { if (currentUtterance === u) setSpeechState(SpeechState.PLAYING, "語音朗讀中..."); };
     u.onend   = () => { if (currentUtterance === u) setSpeechState(SpeechState.IDLE, "朗讀完成"); };
     u.onerror = () => { if (currentUtterance === u) setSpeechState(SpeechState.IDLE, "語音播放發生錯誤"); };
 
     currentUtterance = u;
 
-    // P0-4：Safari 需要延遲一幀；同時檢查是否已被 stopSpeech 清掉
     setTimeout(() => {
         if (synth && currentUtterance === u) synth.speak(u);
     }, 60);
@@ -239,7 +271,6 @@ function stopSpeech() {
     setSpeechState(SpeechState.IDLE, "點擊播放鍵開始語音朗讀");
 }
 
-// P1-9 + P0-2：單一入口更新狀態與 UI
 function setSpeechState(state, statusText) {
     speechState = state;
     const waveEl = document.getElementById('modal-audio-wave');
@@ -257,7 +288,6 @@ function setSpeechState(state, statusText) {
 
 // ============================================
 // P0-7 + P0-8：一次性事件綁定
-// （script.js 置於 body 底部，DOM 已就緒）
 // ============================================
 document.getElementById('project-modal').addEventListener('click', (e) => {
     if (!e.target.closest('.paper-card')) closeProjectModal();
@@ -275,7 +305,7 @@ document.getElementById('projects-grid').addEventListener('click', (e) => {
     openProjectModal(Number(btn.dataset.idx));
 });
 
-// P1-3：初始化導覽狀態（首頁預設 active）
+// P1-3：初始化導覽狀態
 renderNav('home');
 
 // 頁尾年份
