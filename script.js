@@ -2,7 +2,8 @@
 // 程式大選修 - 主程式
 // 已套用：P0-2 / P0-3 / P0-4 / P0-5 / P0-7 / P0-8 / P0-9
 //        P1-2 / P1-3 / P1-5 / P1-7 / P1-8 / P1-9 / P1-10
-// 作品總數：4（已移除前 4 張外鏈佔位符）
+// 本地化：Tailwind / Font Awesome / placeholder
+// 作品總數：4
 // ============================================
 
 const projectsData = [
@@ -141,7 +142,7 @@ function openProjectModal(index) {
     const imgEl = document.getElementById('modal-img');
     imgEl.onerror = function () {
         this.onerror = null;
-        this.src = `https://placehold.co/800x600/1A3029/B58E52?text=${encodeURIComponent(project.title)}`;
+        this.src = 'images/placeholder.svg';
     };
     imgEl.src = project.image;
 
