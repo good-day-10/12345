@@ -85,15 +85,15 @@
         </div>
 
         <div id="mobile-menu" class="hidden md:hidden border-b border-land-gold/20 bg-land-bg px-4 pt-2 pb-4 space-y-2">
-            <button onclick="switchPage('home'); toggleMobileMenu()" class="w-full text-left px-4 py-2.5 rounded-lg text-sm font-medium bg-land-card border border-land-gold/20 flex items-center justify-between">
+            <button onclick="switchPage('home'); toggleMobileMenu()" id="m-nav-home" class="w-full text-left px-4 py-2.5 rounded-lg text-sm font-medium bg-land-card border border-land-gold/20 flex items-center justify-between">
                 <span><i class="fa-solid fa-house mr-2 text-land-gold"></i>首頁與團隊</span>
                 <i class="fa-solid fa-chevron-right text-xs text-land-muted"></i>
             </button>
-            <button onclick="switchPage('projects'); toggleMobileMenu()" class="w-full text-left px-4 py-2.5 rounded-lg text-sm font-medium bg-land-card border border-land-gold/20 flex items-center justify-between">
+            <button onclick="switchPage('projects'); toggleMobileMenu()" id="m-nav-projects" class="w-full text-left px-4 py-2.5 rounded-lg text-sm font-medium bg-land-card border border-land-gold/20 flex items-center justify-between">
                 <span><i class="fa-solid fa-cubes mr-2 text-land-gold"></i>作品介紹</span>
                 <i class="fa-solid fa-chevron-right text-xs text-land-muted"></i>
             </button>
-            <button onclick="switchPage('course'); toggleMobileMenu()" class="w-full text-left px-4 py-2.5 rounded-lg text-sm font-medium bg-land-card border border-land-gold/20 flex items-center justify-between">
+            <button onclick="switchPage('course'); toggleMobileMenu()" id="m-nav-course" class="w-full text-left px-4 py-2.5 rounded-lg text-sm font-medium bg-land-card border border-land-gold/20 flex items-center justify-between">
                 <span><i class="fa-solid fa-graduation-cap mr-2 text-land-gold"></i>課程介紹</span>
                 <i class="fa-solid fa-chevron-right text-xs text-land-muted"></i>
             </button>
@@ -107,7 +107,7 @@
             <div class="relative py-16 sm:py-24 art-grid border-b border-land-gold/15">
                 <div class="max-w-4xl mx-auto px-4 sm:px-6 text-center relative z-10">
                     <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-land-gold/15 border border-land-gold/30 text-land-gold text-xs font-mono font-medium mb-6">
-                        <i class="fa-solid fa-sparkles"></i> 數位工藝與創意程式展覽
+                        <i class="fa-solid fa-wand-magic-sparkles"></i> 數位工藝與創意程式展覽
                     </div>
                     <h2 class="font-serif text-5xl sm:text-7xl font-black text-land-dark tracking-widest leading-tight mb-6">
                         <span class="bg-gradient-to-r from-land-dark via-land-gold to-land-slate bg-clip-text text-transparent inline-block transform hover:scale-105 transition-transform duration-500" style="font-family: 'Noto Serif TC', serif; font-weight: 900;">
@@ -163,43 +163,43 @@
                     <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
                         <div onclick="showMemberInfo('徐愷', '負責前端畫布邏輯與傳統墨跡互動視覺開發。')" class="paper-card rounded-2xl p-4 text-center art-border shadow-sm flex flex-col items-center justify-center gap-2.5 hover:border-land-gold hover:bg-white cursor-pointer transition-all duration-300 group">
                             <div class="w-10 h-10 rounded-full bg-land-dark/10 group-hover:bg-land-dark text-land-gold flex items-center justify-center transition-colors">
-                                <i class="fa-solid fa-user-code text-sm"></i>
+                                <i class="fa-solid fa-user-gear text-sm"></i>
                             </div>
                             <span class="font-serif font-bold text-base text-land-dark tracking-wide">徐愷</span>
                         </div>
                         <div onclick="showMemberInfo('陳朝元', '負責數學筆觸演算法設計與動態擴散特效。')" class="paper-card rounded-2xl p-4 text-center art-border shadow-sm flex flex-col items-center justify-center gap-2.5 hover:border-land-gold hover:bg-white cursor-pointer transition-all duration-300 group">
                             <div class="w-10 h-10 rounded-full bg-land-dark/10 group-hover:bg-land-dark text-land-gold flex items-center justify-center transition-colors">
-                                <i class="fa-solid fa-user-code text-sm"></i>
+                                <i class="fa-solid fa-user-gear text-sm"></i>
                             </div>
                             <span class="font-serif font-bold text-base text-land-dark tracking-wide">陳朝元</span>
                         </div>
                         <div onclick="showMemberInfo('Pig', '負責 AI 時間規劃模組邏輯構想與流程優化。')" class="paper-card rounded-2xl p-4 text-center art-border shadow-sm flex flex-col items-center justify-center gap-2.5 hover:border-land-gold hover:bg-white cursor-pointer transition-all duration-300 group">
                             <div class="w-10 h-10 rounded-full bg-land-dark/10 group-hover:bg-land-dark text-land-gold flex items-center justify-center transition-colors">
-                                <i class="fa-solid fa-user-code text-sm"></i>
+                                <i class="fa-solid fa-user-gear text-sm"></i>
                             </div>
                             <span class="font-serif font-bold text-base text-land-dark tracking-wide">Pig</span>
                         </div>
                         <div onclick="showMemberInfo('殷睿紳', '負責介面排版與使用者任務時間卡片設計。')" class="paper-card rounded-2xl p-4 text-center art-border shadow-sm flex flex-col items-center justify-center gap-2.5 hover:border-land-gold hover:bg-white cursor-pointer transition-all duration-300 group">
                             <div class="w-10 h-10 rounded-full bg-land-dark/10 group-hover:bg-land-dark text-land-gold flex items-center justify-center transition-colors">
-                                <i class="fa-solid fa-user-code text-sm"></i>
+                                <i class="fa-solid fa-user-gear text-sm"></i>
                             </div>
                             <span class="font-serif font-bold text-base text-land-dark tracking-wide">殷睿紳</span>
                         </div>
                         <div onclick="showMemberInfo('李昊恩', '負責遊戲邏輯與地圖關卡機制編程。')" class="paper-card rounded-2xl p-4 text-center art-border shadow-sm flex flex-col items-center justify-center gap-2.5 hover:border-land-gold hover:bg-white cursor-pointer transition-all duration-300 group">
                             <div class="w-10 h-10 rounded-full bg-land-dark/10 group-hover:bg-land-dark text-land-gold flex items-center justify-center transition-colors">
-                                <i class="fa-solid fa-user-code text-sm"></i>
+                                <i class="fa-solid fa-user-gear text-sm"></i>
                             </div>
                             <span class="font-serif font-bold text-base text-land-dark tracking-wide">李昊恩</span>
                         </div>
                         <div onclick="showMemberInfo('小蝎', '負責復古像素繪圖與音樂氛圍視覺設計。')" class="paper-card rounded-2xl p-4 text-center art-border shadow-sm flex flex-col items-center justify-center gap-2.5 hover:border-land-gold hover:bg-white cursor-pointer transition-all duration-300 group">
                             <div class="w-10 h-10 rounded-full bg-land-dark/10 group-hover:bg-land-dark text-land-gold flex items-center justify-center transition-colors">
-                                <i class="fa-solid fa-user-code text-sm"></i>
+                                <i class="fa-solid fa-user-gear text-sm"></i>
                             </div>
                             <span class="font-serif font-bold text-base text-land-dark tracking-wide">小蝎</span>
                         </div>
                         <div onclick="showMemberInfo('李宥嫻', '負責聲控音量檢測與物理彈珠對撞開發。')" class="paper-card rounded-2xl p-4 text-center art-border shadow-sm flex flex-col items-center justify-center gap-2.5 hover:border-land-gold hover:bg-white cursor-pointer transition-all duration-300 col-span-2 sm:col-span-1 group">
                             <div class="w-10 h-10 rounded-full bg-land-dark/10 group-hover:bg-land-dark text-land-gold flex items-center justify-center transition-colors">
-                                <i class="fa-solid fa-user-code text-sm"></i>
+                                <i class="fa-solid fa-user-gear text-sm"></i>
                             </div>
                             <span class="font-serif font-bold text-base text-land-dark tracking-wide">李宥嫻</span>
                         </div>
@@ -326,11 +326,10 @@
             </div>
         </section>
 
-        <!-- ================= 作品詳情 Modal（P0-6：hidden 與 flex 拆到不同層） ================= -->
-        <div id="project-modal" class="fixed inset-0 z-50 hidden p-4 bg-black/60 backdrop-blur-sm transition-opacity">
+        <!-- ================= 作品詳情 Modal ================= -->
+        <div id="project-modal" tabindex="-1" role="dialog" aria-modal="true" aria-labelledby="modal-title" class="fixed inset-0 z-50 hidden p-4 bg-black/60 backdrop-blur-sm outline-none">
             <div class="w-full h-full flex items-center justify-center">
                 <div class="paper-card rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-y-auto art-border shadow-2xl relative p-6 sm:p-8 animate-fadeIn">
-                    <!-- 關閉按鈕 -->
                     <button onclick="closeProjectModal()" class="absolute top-5 right-5 w-9 h-9 rounded-full bg-land-dark/10 hover:bg-land-dark hover:text-land-gold transition-all text-land-dark flex items-center justify-center">
                         <i class="fa-solid fa-xmark text-base"></i>
                     </button>
@@ -342,7 +341,7 @@
                     </div>
 
                     <div class="relative h-56 sm:h-64 rounded-2xl overflow-hidden mb-6 bg-land-dark art-border">
-                        <img id="modal-img" src="" alt="作品大圖" class="w-full h-full object-cover">
+                        <img id="modal-img" src="data:," alt="作品大圖" class="w-full h-full object-cover">
                     </div>
 
                     <div class="mb-6">

@@ -1,6 +1,7 @@
 // ============================================
 // 程式大選修 - 主程式
 // 已套用：P0-2 / P0-3 / P0-4 / P0-5 / P0-7 / P0-8 / P0-9
+//        P1-2 / P1-3 / P1-5 / P1-7 / P1-8 / P1-9 / P1-10
 // （P0-1 在 style.css；P0-6 在 index.html）
 // ============================================
 
@@ -41,32 +42,54 @@ const projectsData = [
 
 let currentModalIndex = null;
 let currentUtterance = null;
-let isPaused = false;
+
+// P1-9：單一狀態機取代 isPaused + synth.paused 雙變數
+const SpeechState = { IDLE: 'idle', PLAYING: 'playing', PAUSED: 'paused' };
+let speechState = SpeechState.IDLE;
 
 // P0-3：speech 特性檢測
 const synth = window.speechSynthesis || null;
 const speechAvailable = !!synth;
 
 // ============================================
-// 頁面切換
+// P1-3 + P1-8：導覽渲染（桌面 + 行動端統一）
+// ============================================
+function renderNav(activePage) {
+    ['home', 'projects', 'course'].forEach(p => {
+        const on = p === activePage;
+        const d = document.getElementById(`nav-${p}`);
+        const m = document.getElementById(`m-nav-${p}`);
+
+        if (d) {
+            d.className = on
+                ? "nav-btn px-5 py-2 rounded-full text-xs font-medium transition-all duration-300 bg-land-dark text-land-gold shadow-sm"
+                : "nav-btn px-5 py-2 rounded-full text-xs font-medium transition-all duration-300 text-land-muted hover:text-land-dark";
+        }
+        if (m) {
+            m.classList.toggle('ring-2', on);
+            m.classList.toggle('ring-land-gold', on);
+        }
+    });
+}
+
+// ============================================
+// P1-2：頁面切換（強制重播 fadeIn 動畫）
 // ============================================
 function switchPage(pageId) {
     const pages = ['home', 'projects', 'course'];
     pages.forEach(p => {
         const pageEl = document.getElementById(`page-${p}`);
-        const navBtn = document.getElementById(`nav-${p}`);
+        if (!pageEl) return;
         if (p === pageId) {
             pageEl.classList.remove('hidden');
-            if (navBtn) {
-                navBtn.className = "nav-btn px-5 py-2 rounded-full text-xs font-medium transition-all duration-300 bg-land-dark text-land-gold shadow-sm";
-            }
+            pageEl.classList.remove('page-transition');
+            void pageEl.offsetWidth; // 強制 reflow，讓 fadeIn 重播
+            pageEl.classList.add('page-transition');
         } else {
             pageEl.classList.add('hidden');
-            if (navBtn) {
-                navBtn.className = "nav-btn px-5 py-2 rounded-full text-xs font-medium transition-all duration-300 text-land-muted hover:text-land-dark";
-            }
         }
     });
+    renderNav(pageId);
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
@@ -79,7 +102,7 @@ function toggleMobileMenu() {
 }
 
 // ============================================
-// P0-9：作品類別篩選（classList.toggle 版）
+// P0-9 + P1-5：作品類別篩選
 // ============================================
 function filterProjects(category) {
     document.querySelectorAll('.filter-btn').forEach(btn => {
@@ -90,6 +113,7 @@ function filterProjects(category) {
         btn.classList.toggle('border-land-gold', active);
         btn.classList.toggle('text-land-dark', !active);
         btn.classList.toggle('border-land-gold/30', !active);
+        btn.classList.toggle('hover:border-land-gold', !active); // P1-5
     });
 
     document.querySelectorAll('.project-card').forEach(card => {
@@ -99,7 +123,7 @@ function filterProjects(category) {
 }
 
 // ============================================
-// P0-5 + P0-7：Modal 開關
+// P0-5 + P0-7 + P1-10：Modal 開關
 // ============================================
 function openProjectModal(index) {
     currentModalIndex = index;
@@ -112,29 +136,37 @@ function openProjectModal(index) {
 
     const imgEl = document.getElementById('modal-img');
     imgEl.onerror = function () {
-        this.onerror = null; // P0-5：斷開死循環
+        this.onerror = null;
         this.src = `https://placehold.co/800x600/1A3029/B58E52?text=${encodeURIComponent(project.title)}`;
     };
     imgEl.src = project.image;
 
     stopSpeech();
-    document.getElementById('project-modal').classList.remove('hidden');
-    document.body.style.overflow = 'hidden'; // P0-7：鎖背景滾動
+    const modalEl = document.getElementById('project-modal');
+    modalEl.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+    modalEl.focus(); // P1-10
 }
 
 function closeProjectModal() {
     stopSpeech();
     document.getElementById('project-modal').classList.add('hidden');
-    document.body.style.overflow = ''; // P0-7
+    document.body.style.overflow = '';
 }
 
 // ============================================
-// 組員提示卡
+// P1-7：組員提示卡（單例復用，不再疊加）
 // ============================================
+let memberToastEl = null;
+let memberToastTimer = null;
+
 function showMemberInfo(name, role) {
-    const messageBox = document.createElement('div');
-    messageBox.className = "fixed bottom-8 right-8 z-50 paper-card p-4 rounded-xl border border-land-gold text-land-dark shadow-2xl flex items-center gap-3 animate-fadeIn max-w-xs";
-    messageBox.innerHTML = `
+    if (!memberToastEl) {
+        memberToastEl = document.createElement('div');
+        memberToastEl.className = "fixed bottom-8 right-8 z-50 paper-card p-4 rounded-xl border border-land-gold text-land-dark shadow-2xl flex items-center gap-3 animate-fadeIn max-w-xs";
+        document.body.appendChild(memberToastEl);
+    }
+    memberToastEl.innerHTML = `
         <div class="w-9 h-9 rounded-full bg-land-dark text-land-gold flex items-center justify-center font-bold text-xs flex-shrink-0">
             <i class="fa-solid fa-user-astronaut"></i>
         </div>
@@ -143,28 +175,28 @@ function showMemberInfo(name, role) {
             <p class="text-[11px] text-land-muted mt-0.5">${role}</p>
         </div>
     `;
-    document.body.appendChild(messageBox);
-    setTimeout(() => {
-        messageBox.style.opacity = '0';
-        messageBox.style.transition = 'opacity 0.5s ease';
-        setTimeout(() => messageBox.remove(), 500);
+    memberToastEl.style.transition = '';
+    memberToastEl.style.opacity = '1';
+    clearTimeout(memberToastTimer);
+    memberToastTimer = setTimeout(() => {
+        memberToastEl.style.transition = 'opacity 0.5s ease';
+        memberToastEl.style.opacity = '0';
     }, 3000);
 }
 
 // ============================================
-// P0-2 / P0-3 / P0-4：語音導覽
+// P0-2 / P0-3 / P0-4 / P1-9：語音導覽
 // ============================================
 function startCurrentSpeech() {
-    if (!speechAvailable) { // P0-3
+    if (!speechAvailable) {
         alert('此瀏覽器不支援語音播放，建議使用 Chrome 或 Edge。');
         return;
     }
     if (currentModalIndex === null) return;
 
-    if (synth.paused && isPaused) {
+    // 從暫停中恢復
+    if (speechState === SpeechState.PAUSED) {
         synth.resume();
-        isPaused = false;
-        updateSpeechUI(true, "朗讀中...");
         return;
     }
 
@@ -173,58 +205,59 @@ function startCurrentSpeech() {
     const project = projectsData[currentModalIndex];
     const textToRead = `${project.title}。創作團隊：${project.author}。${project.description}`;
 
-    currentUtterance = new SpeechSynthesisUtterance(textToRead);
-    currentUtterance.lang = 'zh-TW';
-    currentUtterance.rate = 0.95;
+    const u = new SpeechSynthesisUtterance(textToRead);
+    u.lang = 'zh-TW';
+    u.rate = 0.95;
 
-    currentUtterance.onstart = () => { isPaused = false; updateSpeechUI(true, "語音朗讀中..."); };
-    currentUtterance.onend   = () => { isPaused = false; updateSpeechUI(false, "朗讀完成"); };
-    currentUtterance.onerror = () => { isPaused = false; updateSpeechUI(false, "語音播放發生錯誤"); };
+    // P1-9：回呼裡檢查是否還是自己這條 utterance，避免 cancel 觸發的雜訊覆蓋狀態
+    u.onstart = () => { if (currentUtterance === u) setSpeechState(SpeechState.PLAYING, "語音朗讀中..."); };
+    u.onend   = () => { if (currentUtterance === u) setSpeechState(SpeechState.IDLE, "朗讀完成"); };
+    u.onerror = () => { if (currentUtterance === u) setSpeechState(SpeechState.IDLE, "語音播放發生錯誤"); };
 
-    const ref = currentUtterance;
+    currentUtterance = u;
+
+    // P0-4：Safari 需要延遲一幀；同時檢查是否已被 stopSpeech 清掉
     setTimeout(() => {
-        if (synth && ref) synth.speak(ref);
-    }, 60); // P0-4：Safari 需要延遲一幀
+        if (synth && currentUtterance === u) synth.speak(u);
+    }, 60);
 }
 
 function toggleSpeechPause() {
     if (!speechAvailable) return;
-    if (synth.speaking && !synth.paused) {
+    if (speechState === SpeechState.PLAYING) {
         synth.pause();
-        isPaused = true;
-        updateSpeechUI(false, "已暫停朗讀");
-    } else if (synth.paused) {
+        setSpeechState(SpeechState.PAUSED, "已暫停朗讀");
+    } else if (speechState === SpeechState.PAUSED) {
         synth.resume();
-        isPaused = false;
-        updateSpeechUI(true, "繼續朗讀中...");
+        setSpeechState(SpeechState.PLAYING, "繼續朗讀中...");
     }
 }
 
 function stopSpeech() {
     if (synth) synth.cancel();
     currentUtterance = null;
-    isPaused = false;
-    updateSpeechUI(false, "點擊播放鍵開始語音朗讀");
+    setSpeechState(SpeechState.IDLE, "點擊播放鍵開始語音朗讀");
 }
 
-function updateSpeechUI(isPlaying, statusText) {
+// P1-9 + P0-2：單一入口更新狀態與 UI
+function setSpeechState(state, statusText) {
+    speechState = state;
     const waveEl = document.getElementById('modal-audio-wave');
     const statusEl = document.getElementById('speech-status-text');
     const btnPlay = document.getElementById('btn-play-speech');
 
     if (statusEl) statusEl.textContent = statusText;
-    if (waveEl) waveEl.classList.toggle('hidden', !isPlaying);
+    if (waveEl) waveEl.classList.toggle('hidden', state !== SpeechState.PLAYING);
 
-    // P0-2：用 toggle 互斥，避開 Tailwind CSS 順序坑
     if (btnPlay) {
-        btnPlay.classList.toggle('bg-land-slate', isPlaying);
-        btnPlay.classList.toggle('bg-land-gold', !isPlaying);
+        btnPlay.classList.toggle('bg-land-slate', state === SpeechState.PLAYING);
+        btnPlay.classList.toggle('bg-land-gold', state !== SpeechState.PLAYING);
     }
 }
 
 // ============================================
 // P0-7 + P0-8：一次性事件綁定
-// （script.js 置於 body 底部，此時 DOM 已就緒）
+// （script.js 置於 body 底部，DOM 已就緒）
 // ============================================
 document.getElementById('project-modal').addEventListener('click', (e) => {
     if (!e.target.closest('.paper-card')) closeProjectModal();
@@ -241,6 +274,9 @@ document.getElementById('projects-grid').addEventListener('click', (e) => {
     if (!btn) return;
     openProjectModal(Number(btn.dataset.idx));
 });
+
+// P1-3：初始化導覽狀態（首頁預設 active）
+renderNav('home');
 
 // 頁尾年份
 const yearEl = document.getElementById('year');
