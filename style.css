@@ -1,6 +1,11 @@
+/* ============================================
+   程式大選修 - 自定義樣式
+   ============================================ */
+
+/* 大地藝術節手感紙質與網格紋理 */
 .land-texture {
     background-color: #F7F4EE;
-    background-image: 
+    background-image:
         radial-gradient(rgba(181, 142, 82, 0.07) 1px, transparent 0),
         radial-gradient(rgba(26, 48, 41, 0.03) 1px, transparent 0);
     background-size: 36px 36px;
@@ -33,7 +38,7 @@
 /* 藝術背景網格 */
 .art-grid {
     background-size: 48px 48px;
-    background-image: 
+    background-image:
         linear-gradient(to right, rgba(181, 142, 82, 0.05) 1px, transparent 1px),
         linear-gradient(to bottom, rgba(181, 142, 82, 0.05) 1px, transparent 1px);
 }
@@ -55,6 +60,11 @@
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(8px); }
     to { opacity: 1; transform: translateY(0); }
+}
+
+/* P0-1：彈窗與浮動提示卡淡入（原版缺失） */
+.animate-fadeIn {
+    animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 ::-webkit-scrollbar { width: 6px; }
