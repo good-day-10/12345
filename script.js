@@ -3,11 +3,11 @@
 // 已套用：P0-2 / P0-3 / P0-4 / P0-5 / P0-7 / P0-8 / P0-9
 //        P1-2 / P1-3 / P1-5 / P1-7 / P1-8 / P1-9 / P1-10
 // 本地化：Tailwind / Font Awesome / placeholder
-// 作品總數：9（4 舊 + 5 新 Kai 的作品）
+// 作品總數：11（4 舊 Pig + 5 徐愷 + 2 新：將軍村、Luna Piano）
 // ============================================
 
 const projectsData = [
-    // 作品 1 - data-idx="0"（封面依你 HTML 版本改為 calendarv2.webp）
+    // 作品 1 - data-idx="0"
     {
         title: "圖文日曆：視覺化事件記錄",
         author: "Pig",
@@ -43,11 +43,11 @@ const projectsData = [
         image: "images/timer.webp",
         description: "這是一個靈活的計時工具，提供「正計時」與「倒計時」兩種模式，並允許同時新增多個計時器，各自獨立運作。每個計時器都能開始、計次、重設，並以清晰數字顯示經過時間或剩餘時間。全螢幕模式讓時間數字更醒目，適合廚房烹飪、運動計時、工作專注等需要精準掌握時間的場景。"
     },
-    // ───── 新增 5 件 Kai 的作品（data-idx 4-8） ─────
+    // ───── 徐愷 的作品（data-idx 4-8） ─────
     // 作品 5 - data-idx="4"
     {
         title: "日本神社御神籤：線上運勢占卜",
-        author: "Kai",
+        author: "徐愷",
         category: "game",
         tag: "趣味遊戲",
         image: "images/placeholder.svg",
@@ -56,7 +56,7 @@ const projectsData = [
     // 作品 6 - data-idx="5"
     {
         title: "中文詞彙抽取器：每日一詞",
-        author: "Kai",
+        author: "徐愷",
         category: "tool",
         tag: "生活工具",
         image: "images/placeholder.svg",
@@ -65,7 +65,7 @@ const projectsData = [
     // 作品 7 - data-idx="6"
     {
         title: "台灣玩耍記憶資料庫：集體童年故事",
-        author: "Kai",
+        author: "徐愷",
         category: "site",
         tag: "展示網站",
         image: "images/placeholder.svg",
@@ -74,7 +74,7 @@ const projectsData = [
     // 作品 8 - data-idx="7"
     {
         title: "Studio Portfolio：程式設計工作室作品集",
-        author: "Kai",
+        author: "徐愷",
         category: "site",
         tag: "展示網站",
         image: "images/placeholder.svg",
@@ -83,11 +83,30 @@ const projectsData = [
     // 作品 9 - data-idx="8"
     {
         title: "地景臺灣島：用泥土與水堆築的島嶼",
-        author: "Kai",
+        author: "徐愷",
         category: "site",
         tag: "展示網站",
         image: "images/placeholder.svg",
         description: "這是一個記錄地景藝術創作歷程的展示網站，完整呈現「用泥土與水，堆疊出我們心中的臺灣」這件作品的誕生過程。計畫位於新竹縣新埔鎮，緊鄰味衛佳柿餅與涼井人文咖啡廳，團隊從一旁的池塘引水、在空地上堆土，一步步塑出臺灣山脈的輪廓，並設置排水口讓水流循環。網站以「島嶼誕生的四個步伐」為敘事主軸——引水與堆土、塑形臺灣山脈、設置排水口、鋪設觀賞走道——搭配虛擬走道導覽與生態角落的記錄，呈現螃蟹與青蛙等「新居民」的到來。網站也串聯在地景點資訊，邀請訪客在秋季柿餅產季親自走一趟，感受土地與藝術交會的溫度。"
+    },
+    // ───── 新增 2 件（data-idx 9-10） ─────
+    // 作品 10 - data-idx="9"
+    {
+        title: "將軍村最後一封電報（將軍村實境解謎）",
+        author: "陳朝元",
+        category: "site",
+        tag: "展示網站",
+        image: "images/placeholder.svg",
+        description: "這個是「實境解謎遊戲」，玩家要搭配材料包以及手機上的虛擬劇情。在現場實地與環境互動，從而完成遊戲，並重點理解將軍村的導覽內容。我做這個的動機是為了延續我們之前參加的金車文教，文化理解組首獎的企劃。當時我們的企劃內容著重在「數位導覽」，例如拍影片擺放 QRcode。這樣做的目的是為了解決導覽員人手不足的情況。延續這個數位導覽的概念，我自己在寒假時報名了數個關於 AI 開發的營隊，去台南的奇美博物館實際試完別人的成品、將軍村場刊，最後製作出實解謎遊戲。我希望透過遊戲的方式吸引更多人前來參觀。我也在遊戲中安插一些歷史知識讓人在輕鬆的氛圍下也能學習枯燥的歷史。我希望透過實境解謎的方式，結合 SDGs 永續發展讓古蹟活化、文化傳承能一直經營下去。"
+    },
+    // 作品 11 - data-idx="10"
+    {
+        title: "Luna Piano",
+        author: "李昊恩",
+        category: "game",
+        tag: "趣味遊戲",
+        image: "images/placeholder.svg",
+        description: "Luna Piano 是一款可在瀏覽器中使用的電子鋼琴，提供 50 個黑白琴鍵，搭配原聲鋼琴取樣，支援電腦鍵盤、手機多點觸控與按住滑動換音。你可以使用空白鍵或畫面踏板延長琴音，也能自訂踏板按鍵；鋼琴會保留自然衰減，呈現接近實體踏板的演奏感。除了彈奏鋼琴，也能錄製聲音或匯入音檔，裁切片段、辨識音高並套用到指定琴鍵，打造個人化取樣音色。設定中可調整音量、整體移調、起音、釋音、回音與混響；琴鍵可切換全覽或放大模式，方便在不同尺寸的螢幕上演奏。無論是日常練習、嘗試旋律，或把自己的聲音變成樂器，都能快速開始。"
     }
 ];
 
