@@ -36,20 +36,16 @@
         };
     </script>
 
-    <!-- Font Awesome（本地化） -->
     <link rel="stylesheet" href="vendor/fontawesome/css/all.min.css">
 
-    <!-- Google Fonts（保留外链） -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700;900&family=Playfair+Display:ital,wght@0,600;0,700;0,900;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-    <!-- 自定義樣式 -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body class="land-texture text-land-text font-sans antialiased min-h-screen flex flex-col justify-between selection:bg-land-gold selection:text-white">
 
-    <!-- 頂部導覽列 -->
     <header class="sticky top-0 z-50 backdrop-blur-md bg-land-bg/90 border-b border-land-gold/20 shadow-sm">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
             <div class="flex items-center space-x-3 cursor-pointer" onclick="switchPage('home')">
@@ -57,9 +53,7 @@
                     <i class="fa-solid font-mono text-base font-bold">&lt;/&gt;</i>
                 </div>
                 <div>
-                    <h1 class="font-serif font-bold text-xl tracking-wider text-land-dark">
-                        程式大選修
-                    </h1>
+                    <h1 class="font-serif font-bold text-xl tracking-wider text-land-dark">程式大選修</h1>
                 </div>
             </div>
 
@@ -100,7 +94,6 @@
 
     <main class="flex-grow">
 
-        <!-- ================= 首頁與團隊 ================= -->
         <section id="page-home" class="page-transition">
             <div class="relative py-16 sm:py-24 art-grid border-b border-land-gold/15">
                 <div class="max-w-4xl mx-auto px-4 sm:px-6 text-center relative z-10">
@@ -207,7 +200,6 @@
             </div>
         </section>
 
-        <!-- ================= 作品介紹 ================= -->
         <section id="page-projects" class="page-transition hidden min-h-screen py-12">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
@@ -466,12 +458,35 @@
                             </button>
                         </div>
                     </div>
+
+                    <!-- 作品 12 - 選擇前，請深思 -->
+                    <div class="project-card paper-card rounded-2xl overflow-hidden shadow-land hover:shadow-land-hover transition-all duration-300 art-border flex flex-col" data-category="game">
+                        <div class="relative h-48 overflow-hidden bg-land-dark">
+                            <img src="images/book.webp" alt="選擇前，請深思" class="w-full h-full object-cover opacity-90 hover:scale-105 transition-transform duration-500" onerror="this.onerror=null;this.src='images/placeholder.svg'">
+                            <!-- 裝飾標籤（左上角） -->
+                            <span class="absolute top-3 left-3 text-[10px] font-serif px-2.5 py-0.5 rounded-full bg-land-gold/90 text-land-dark border border-land-gold/50 font-semibold">哲學</span>
+                            <!-- 主分類標籤（右上角） -->
+                            <span class="absolute top-3 right-3 text-[10px] font-mono px-2.5 py-0.5 rounded-full bg-land-dark/90 text-land-gold border border-land-gold/40">趣味遊戲</span>
+                        </div>
+                        <div class="p-6 flex-grow flex flex-col justify-between">
+                            <div>
+                                <h3 class="font-serif font-bold text-lg text-land-dark mb-1">「選擇前，請深思」</h3>
+                                <p class="text-xs text-land-gold font-semibold font-mono mb-3"><i class="fa-solid fa-pen-nib mr-1"></i>創作人：殷睿紳</p>
+                                <p class="text-xs text-land-muted leading-relaxed line-clamp-3 mb-4">
+                                    你不需要每次都做得完美；看見選擇帶來的影響，並願意調整，就是往前走。
+                                </p>
+                            </div>
+                            <button data-idx="11" class="js-open-modal w-full py-2.5 px-4 rounded-xl bg-land-dark text-land-gold text-xs font-medium hover:bg-land-slate transition-all flex items-center justify-center gap-2 shadow-sm">
+                                <i class="fa-solid fa-circle-info text-xs"></i>
+                                <span>查看更多</span>
+                            </button>
+                        </div>
+                    </div>
                 </div>
 
             </div>
         </section>
 
-        <!-- ================= 作品詳情 Modal ================= -->
         <div id="project-modal" tabindex="-1" role="dialog" aria-modal="true" aria-labelledby="modal-title" class="fixed inset-0 z-50 hidden p-4 bg-black/60 backdrop-blur-sm outline-none">
             <div class="w-full h-full flex items-center justify-center">
                 <div class="paper-card rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-y-auto art-border shadow-2xl relative p-6 sm:p-8 animate-fadeIn">
@@ -532,7 +547,6 @@
             </div>
         </div>
 
-        <!-- ================= 課程介紹 ================= -->
         <section id="page-course" class="page-transition hidden min-h-screen py-12">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 

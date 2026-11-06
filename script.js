@@ -3,7 +3,7 @@
 // 已套用：P0-2 / P0-3 / P0-4 / P0-5 / P0-7 / P0-8 / P0-9
 //        P1-2 / P1-3 / P1-5 / P1-7 / P1-8 / P1-9 / P1-10
 // 本地化：Tailwind / Font Awesome / placeholder
-// 作品總數：11（4 舊 Pig + 5 Kai + 2 新：將軍村、Luna Piano）
+// 作品總數：12
 // ============================================
 
 const projectsData = [
@@ -43,7 +43,6 @@ const projectsData = [
         image: "images/timer.webp",
         description: "這是一個靈活的計時工具，提供「正計時」與「倒計時」兩種模式，並允許同時新增多個計時器，各自獨立運作。每個計時器都能開始、計次、重設，並以清晰數字顯示經過時間或剩餘時間。全螢幕模式讓時間數字更醒目，適合廚房烹飪、運動計時、工作專注等需要精準掌握時間的場景。"
     },
-    // ───── Kai 的作品（data-idx 4-8） ─────
     // 作品 5 - data-idx="4"
     {
         title: "日本神社御神籤：線上運勢占卜",
@@ -89,7 +88,6 @@ const projectsData = [
         image: "images/natural.webp",
         description: "這是一個記錄地景藝術創作歷程的展示網站，完整呈現「用泥土與水，堆疊出我們心中的臺灣」這件作品的誕生過程。計畫位於新竹縣新埔鎮，緊鄰味衛佳柿餅與涼井人文咖啡廳，團隊從一旁的池塘引水、在空地上堆土，一步步塑出臺灣山脈的輪廓，並設置排水口讓水流循環。網站以「島嶼誕生的四個步伐」為敘事主軸——引水與堆土、塑形臺灣山脈、設置排水口、鋪設觀賞走道——搭配虛擬走道導覽與生態角落的記錄，呈現螃蟹與青蛙等「新居民」的到來。網站也串聯在地景點資訊，邀請訪客在秋季柿餅產季親自走一趟，感受土地與藝術交會的溫度。"
     },
-    // ───── 新增 2 件（data-idx 9-10） ─────
     // 作品 10 - data-idx="9"
     {
         title: "將軍村最後一封電報（將軍村實境解謎）",
@@ -107,23 +105,27 @@ const projectsData = [
         tag: "趣味遊戲",
         image: "images/piano.webp",
         description: "Luna Piano 是一款可在瀏覽器中使用的電子鋼琴，提供 50 個黑白琴鍵，搭配原聲鋼琴取樣，支援電腦鍵盤、手機多點觸控與按住滑動換音。你可以使用空白鍵或畫面踏板延長琴音，也能自訂踏板按鍵；鋼琴會保留自然衰減，呈現接近實體踏板的演奏感。除了彈奏鋼琴，也能錄製聲音或匯入音檔，裁切片段、辨識音高並套用到指定琴鍵，打造個人化取樣音色。設定中可調整音量、整體移調、起音、釋音、回音與混響；琴鍵可切換全覽或放大模式，方便在不同尺寸的螢幕上演奏。無論是日常練習、嘗試旋律，或把自己的聲音變成樂器，都能快速開始。"
+    },
+    // 作品 12 - data-idx="11"
+    {
+        title: "「選擇前，請深思」",
+        author: "殷睿紳",
+        category: "game",
+        tag: "趣味遊戲",
+        image: "images/book.webp",
+        description: "玩家將透過不同的生活情境做出選擇，例：時間管理、人際互動、情緒控制、團隊合作等。遊戲分為《我的一天（學生版）》與《我的一天（大人版）》。遊戲不會直接告訴玩家答案是對還是錯，而是透過後續劇情讓玩家體驗選擇所產生的結果，進而學習思考、判斷與承擔。希望玩家在遊玩的過程中，理解看似微小的決定，其實正在悄悄塑造未來的自己。"
     }
 ];
 
 let currentModalIndex = null;
 let currentUtterance = null;
 
-// P1-9：單一狀態機
 const SpeechState = { IDLE: 'idle', PLAYING: 'playing', PAUSED: 'paused' };
 let speechState = SpeechState.IDLE;
 
-// P0-3：speech 特性檢測
 const synth = window.speechSynthesis || null;
 const speechAvailable = !!synth;
 
-// ============================================
-// P1-3 + P1-8：導覽渲染
-// ============================================
 function renderNav(activePage) {
     ['home', 'projects', 'course'].forEach(p => {
         const on = p === activePage;
@@ -142,9 +144,6 @@ function renderNav(activePage) {
     });
 }
 
-// ============================================
-// P1-2：頁面切換（強制重播 fadeIn）
-// ============================================
 function switchPage(pageId) {
     const pages = ['home', 'projects', 'course'];
     pages.forEach(p => {
@@ -163,17 +162,11 @@ function switchPage(pageId) {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-// ============================================
-// 行動端選單
-// ============================================
 function toggleMobileMenu() {
     const menu = document.getElementById('mobile-menu');
     if (menu) menu.classList.toggle('hidden');
 }
 
-// ============================================
-// P0-9 + P1-5：作品類別篩選
-// ============================================
 function filterProjects(category) {
     document.querySelectorAll('.filter-btn').forEach(btn => {
         const active = btn.id === `filter-${category}`;
@@ -192,9 +185,6 @@ function filterProjects(category) {
     });
 }
 
-// ============================================
-// P0-5 + P0-7 + P1-10：Modal 開關
-// ============================================
 function openProjectModal(index) {
     currentModalIndex = index;
     const project = projectsData[index];
@@ -224,9 +214,6 @@ function closeProjectModal() {
     document.body.style.overflow = '';
 }
 
-// ============================================
-// P1-7：組員提示卡（單例）
-// ============================================
 let memberToastEl = null;
 let memberToastTimer = null;
 
@@ -254,9 +241,6 @@ function showMemberInfo(name, role) {
     }, 3000);
 }
 
-// ============================================
-// P0-2 / P0-3 / P0-4 / P1-9：語音導覽
-// ============================================
 function startCurrentSpeech() {
     if (!speechAvailable) {
         alert('此瀏覽器不支援語音播放，建議使用 Chrome 或 Edge。');
@@ -321,9 +305,6 @@ function setSpeechState(state, statusText) {
     }
 }
 
-// ============================================
-// P0-7 + P0-8：一次性事件綁定
-// ============================================
 document.getElementById('project-modal').addEventListener('click', (e) => {
     if (!e.target.closest('.paper-card')) closeProjectModal();
 });
@@ -340,9 +321,7 @@ document.getElementById('projects-grid').addEventListener('click', (e) => {
     openProjectModal(Number(btn.dataset.idx));
 });
 
-// P1-3：初始化導覽狀態
 renderNav('home');
 
-// 頁尾年份
 const yearEl = document.getElementById('year');
 if (yearEl) yearEl.textContent = new Date().getFullYear();
