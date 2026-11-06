@@ -3,7 +3,7 @@
 // 已套用：P0-2 / P0-3 / P0-4 / P0-5 / P0-7 / P0-8 / P0-9
 //        P1-2 / P1-3 / P1-5 / P1-7 / P1-8 / P1-9 / P1-10
 // 本地化：Tailwind / Font Awesome / placeholder
-// 作品總數：11（4 舊 Pig + 5 徐愷 + 2 新：將軍村、Luna Piano）
+// 作品總數：11（4 舊 Pig + 5 Kai + 2 新：將軍村、Luna Piano）
 // ============================================
 
 const projectsData = [
@@ -43,29 +43,29 @@ const projectsData = [
         image: "images/timer.webp",
         description: "這是一個靈活的計時工具，提供「正計時」與「倒計時」兩種模式，並允許同時新增多個計時器，各自獨立運作。每個計時器都能開始、計次、重設，並以清晰數字顯示經過時間或剩餘時間。全螢幕模式讓時間數字更醒目，適合廚房烹飪、運動計時、工作專注等需要精準掌握時間的場景。"
     },
-    // ───── 徐愷 的作品（data-idx 4-8） ─────
+    // ───── Kai 的作品（data-idx 4-8） ─────
     // 作品 5 - data-idx="4"
     {
         title: "日本神社御神籤：線上運勢占卜",
-        author: "徐愷",
+        author: "Kai",
         category: "game",
         tag: "趣味遊戲",
-        image: "images/placeholder.svg",
+        image: "images/chuo-chen.webp",
         description: "這是一個模擬日本神社御神籤的線上占卜工具。進入頁面後，畫面引導你靜下心來，向神明默念心中所想，然後透過「搖籤」的互動抽取今日運勢。整體氛圍安靜而帶有儀式感，適合在想尋求一點方向、或單純想為一天增添趣味時使用。無論是當作每日的小小占卜，還是與朋友分享抽到的結果，都能感受到那份來自神社的溫柔寓意。"
     },
     // 作品 6 - data-idx="5"
     {
         title: "中文詞彙抽取器：每日一詞",
-        author: "徐愷",
+        author: "Kai",
         category: "tool",
         tag: "生活工具",
-        image: "images/placeholder.svg",
+        image: "images/chuo-chen.webp",
         description: "這是一個為中文學習者設計的詞彙抽取工具，核心理念是「今天，認識一個詞」。每次進入頁面，系統會從詞庫中隨機抽出一個詞彙，並呈現它的拼音、英文釋義，以及一句貼近日常的例句。你可以點擊「聽一聽」來聆聽發音，也可以「再說一次」複習。學習足跡會自動保存在這台裝置上，不需要註冊帳號。整體節奏輕鬆、不給壓力，適合每天花幾分鐘，慢慢累積詞彙量。"
     },
     // 作品 7 - data-idx="6"
     {
         title: "台灣玩耍記憶資料庫：集體童年故事",
-        author: "徐愷",
+        author: "Kai",
         category: "site",
         tag: "展示網站",
         image: "images/placeholder.svg",
@@ -74,7 +74,7 @@ const projectsData = [
     // 作品 8 - data-idx="7"
     {
         title: "Studio Portfolio：程式設計工作室作品集",
-        author: "徐愷",
+        author: "Kai",
         category: "site",
         tag: "展示網站",
         image: "images/website.webp",
@@ -83,10 +83,10 @@ const projectsData = [
     // 作品 9 - data-idx="8"
     {
         title: "地景臺灣島：用泥土與水堆築的島嶼",
-        author: "徐愷",
+        author: "Kai",
         category: "site",
         tag: "展示網站",
-        image: "images/placeholder.svg",
+        image: "images/natural.webp",
         description: "這是一個記錄地景藝術創作歷程的展示網站，完整呈現「用泥土與水，堆疊出我們心中的臺灣」這件作品的誕生過程。計畫位於新竹縣新埔鎮，緊鄰味衛佳柿餅與涼井人文咖啡廳，團隊從一旁的池塘引水、在空地上堆土，一步步塑出臺灣山脈的輪廓，並設置排水口讓水流循環。網站以「島嶼誕生的四個步伐」為敘事主軸——引水與堆土、塑形臺灣山脈、設置排水口、鋪設觀賞走道——搭配虛擬走道導覽與生態角落的記錄，呈現螃蟹與青蛙等「新居民」的到來。網站也串聯在地景點資訊，邀請訪客在秋季柿餅產季親自走一趟，感受土地與藝術交會的溫度。"
     },
     // ───── 新增 2 件（data-idx 9-10） ─────
@@ -105,7 +105,7 @@ const projectsData = [
         author: "李昊恩",
         category: "game",
         tag: "趣味遊戲",
-        image: "images/placeholder.svg",
+        image: "images/piano.webp",
         description: "Luna Piano 是一款可在瀏覽器中使用的電子鋼琴，提供 50 個黑白琴鍵，搭配原聲鋼琴取樣，支援電腦鍵盤、手機多點觸控與按住滑動換音。你可以使用空白鍵或畫面踏板延長琴音，也能自訂踏板按鍵；鋼琴會保留自然衰減，呈現接近實體踏板的演奏感。除了彈奏鋼琴，也能錄製聲音或匯入音檔，裁切片段、辨識音高並套用到指定琴鍵，打造個人化取樣音色。設定中可調整音量、整體移調、起音、釋音、回音與混響；琴鍵可切換全覽或放大模式，方便在不同尺寸的螢幕上演奏。無論是日常練習、嘗試旋律，或把自己的聲音變成樂器，都能快速開始。"
     }
 ];
