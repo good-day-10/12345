@@ -4,48 +4,48 @@
 //        P1-2 / P1-3 / P1-5 / P1-7 / P1-8 / P1-9 / P1-10
 // 新增：作品連結（彈窗內「作品連結」區塊）
 // 本地化：Tailwind / Font Awesome / placeholder
-// 作品總數：12
+// 作品總數：12（10 有連結，2 無連結）
 // ============================================
 
 const projectsData = [
-    // 作品 1 - data-idx="0"（無連結）
+    // 作品 1 - data-idx="0"（有連結：圖文日曆）
     {
         title: "圖文日曆：視覺化事件記錄",
         author: "Pig",
         category: "tool",
         tag: "生活工具",
         image: "images/calendarv2.webp",
-        link: null,
+        link: "https://pig-ci.github.io/img-calendar/",
         description: "這是一個結合圖片與日曆的事件記錄工具。除了月曆檢視，你可以為任何一天新增事件，填寫標題、日期、全天或特定時間段、描述，並上傳一張代表圖片。無論是生日、旅行、紀念日，或想記下某個特別瞬間，都能用圖片讓日曆更有溫度。表單設計直覺，適合喜歡用視覺方式整理生活的人。"
     },
-    // 作品 2 - data-idx="1"（無連結）
+    // 作品 2 - data-idx="1"（有連結：Payas Days）
     {
         title: "Payas Days：簡約日曆",
         author: "Pig",
         category: "tool",
         tag: "生活工具",
         image: "images/calendar.webp",
-        link: null,
+        link: "https://pig-ci.github.io/calendar/",
         description: "Payas Days 專注於最核心的日曆體驗：清楚呈現每個月的日期排列，標示星期與今天的位置。頁面提供「點擊前往今天」的快捷功能，讓你無論瀏覽到哪個月，都能一鍵返回當前日期。沒有多餘裝飾或複雜操作，適合喜歡極簡風格、只需要快速確認日期與規劃行程的使用者。"
     },
-    // 作品 3 - data-idx="2"（無連結）
+    // 作品 3 - data-idx="2"（有連結：Turtle Planner）
     {
         title: "Turtle Planner：每日任務規劃",
         author: "Pig",
         category: "tool",
         tag: "生活工具",
         image: "images/planner.webp",
-        link: null,
+        link: "https://pig-ci.github.io/turtle-planner/",
         description: "Turtle Planner 圍繞「今天要完成什麼？」設計。你可以新增多項任務，為每項填寫任務內容、選擇分類、指定地點，並設定開始時間、結束時間與預計時長。當一天規劃完成後，可以將清單鎖定，避免臨時更動。內建統計後台會顯示完成率總覽，幫助你回顧每日目標的達成情況，適合需要結構化安排一天行程的使用者。"
     },
-    // 作品 4 - data-idx="3"（無連結）
+    // 作品 4 - data-idx="3"（有連結：多功能計時器）
     {
         title: "多功能計時器：正計時與倒計時",
         author: "Pig",
         category: "tool",
         tag: "生活工具",
         image: "images/timer.webp",
-        link: null,
+        link: "https://pig-ci.github.io/timer/",
         description: "這是一個靈活的計時工具，提供「正計時」與「倒計時」兩種模式，並允許同時新增多個計時器，各自獨立運作。每個計時器都能開始、計次、重設，並以清晰數字顯示經過時間或剩餘時間。全螢幕模式讓時間數字更醒目，適合廚房烹飪、運動計時、工作專注等需要精準掌握時間的場景。"
     },
     // 作品 5 - data-idx="4"（有連結：日本神社御神籤）
