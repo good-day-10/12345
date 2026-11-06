@@ -77,7 +77,7 @@ const projectsData = [
         author: "徐愷",
         category: "site",
         tag: "展示網站",
-        image: "images/placeholder.svg",
+        image: "images/website.webp",
         description: "這是一個程式設計工作室的線上作品集網站，以簡潔的版面展示團隊歷年來打造的網站、應用程式與各類工具。頁面開頭以「Studio Portfolio」為標題，簡要說明工作室的服務範疇——能做網站、APP、工具等等，下方則以「精選我們打造的網站、應用程式與工具」引導訪客探索實際作品。整體設計乾淨、直接，適合讓潛在合作對象快速了解團隊的開發能力與作品風格，也適合作為工作室對外的數位門面。"
     },
     // 作品 9 - data-idx="8"
