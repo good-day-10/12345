@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>程式大選修 - 成果發表展覽會</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: 藝術襯線體與典雅字型 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700;900&family=Playfair+Display:ital,wght@0,600;0,700;0,900;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        land: {
+                            bg: '#F7F4EE',           /* 大地文化感手感暖米白 */
+                            card: '#EFEBE4',         /* 微質感沉穩紙感卡片 */
+                            dark: '#1A3029',         /* 深沉墨綠 */
+                            slate: '#27443B',        /* 典雅綠竹墨色 */
+                            gold: '#B58E52',         /* 人文古銅金 */
+                            goldhover: '#9E783E',
+                            terracotta: '#A65D47',   /* 陶土微紅暖色 */
+                            text: '#2C2B29',         /* 沉穩墨黑文字 */
+                            muted: '#6B6861'         /* 人文灰 */
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['"Noto Serif TC"', '"Playfair Display"', 'serif'],
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif']
+                    },
+                    boxShadow: {
+                        'land': '0 4px 20px -2px rgba(26, 48, 41, 0.05), 0 2px 6px -1px rgba(26, 48, 41, 0.03)',
+                        'land-hover': '0 12px 28px -4px rgba(26, 48, 41, 0.1), 0 4px 12px -2px rgba(181, 142, 82, 0.15)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* 大地藝術節手感紙質與網格紋理 */
+        .land-texture {
+            background-color: #F7F4EE;
+            background-image: 
+                radial-gradient(rgba(181, 142, 82, 0.07) 1px, transparent 0),
+                radial-gradient(rgba(26, 48, 41, 0.03) 1px, transparent 0);
+            background-size: 36px 36px;
+            background-position: 0 0, 18px 18px;
+        }
+
+        .paper-card {
+            background: linear-gradient(145deg, rgba(255,255,255,0.92) 0%, rgba(239,235,228,0.95) 100%);
+            border: 1px solid rgba(181, 142, 82, 0.25);
+            backdrop-filter: blur(8px);
+        }
+
+        /* 幾何科技藝術邊框 */
+        .art-border {
+            position: relative;
+        }
+        .art-border::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            border-radius: inherit;
+            padding: 1px;
+            background: linear-gradient(135deg, rgba(181, 142, 82, 0.4), rgba(26, 48, 41, 0.15), rgba(181, 142, 82, 0.2));
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+        }
+
+        /* 藝術背景網格 */
+        .art-grid {
+            background-size: 48px 48px;
+            background-image: 
+                linear-gradient(to right, rgba(181, 142, 82, 0.05) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(181, 142, 82, 0.05) 1px, transparent 1px);
+        }
+
+        /* 語音波形動畫 */
+        @keyframes audio-wave {
+            0%, 100% { height: 4px; }
+            50% { height: 18px; }
+        }
+        .animate-wave-1 { animation: audio-wave 1.2s infinite ease-in-out; }
+        .animate-wave-2 { animation: audio-wave 0.8s infinite ease-in-out 0.2s; }
+        .animate-wave-3 { animation: audio-wave 1.0s infinite ease-in-out 0.4s; }
+        .animate-wave-4 { animation: audio-wave 1.4s infinite ease-in-out 0.1s; }
+
+        /* 頁面淡入 */
+        .page-transition {
+            animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #F7F4EE; }
+        ::-webkit-scrollbar-thumb { background: #B58E52; border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: #9E783E; }
+    </style>
+</head>
+<body class="land-texture text-land-text font-sans antialiased min-h-screen flex flex-col justify-between selection:bg-land-gold selection:text-white">
+
+    <!-- 頂部膠囊導覽列 Navigation Bar -->
+    <header class="sticky top-0 z-50 backdrop-blur-md bg-land-bg/90 border-b border-land-gold/20 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- 網站 Logo 與 Title -->
+            <div class="flex items-center space-x-3 cursor-pointer" onclick="switchPage('home')">
+                <div class="w-10 h-10 rounded-lg bg-land-dark flex items-center justify-center text-land-gold shadow-md art-border">
+                    <i class="fa-solid font-mono text-base font-bold">&lt;/&gt;</i>
+                </div>
+                <div>
+                    <h1 class="font-serif font-bold text-xl tracking-wider text-land-dark">
+                        程式大選修
+                    </h1>
+                </div>
+            </div>
+
+            <!-- 桌面端切換頁面選單 (無第幾頁與冒號) -->
+            <!-- 桌面端切換頁面選單 -->
+            <nav class="hidden md:flex items-center space-x-1.5 bg-land-card/70 px-2 py-1.5 rounded-full border border-land-gold/30 art-border">
+                <button onclick="switchPage('home')" id="nav-home" class="nav-btn px-5 py-2 rounded-full text-xs font-medium transition-all duration-300 bg-land-dark text-land-gold shadow-sm">
+                    <i class="fa-solid fa-house mr-1.5"></i>首頁與團隊
+                </button>
+                <button onclick="switchPage('projects')" id="nav-projects" class="nav-btn px-5 py-2 rounded-full text-xs font-medium transition-all duration-300 text-land-muted hover:text-land-dark">
+                    <i class="fa-solid fa-cubes mr-1.5"></i>作品介紹
+                </button>
+                <button onclick="switchPage('course')" id="nav-course" class="nav-btn px-5 py-2 rounded-full text-xs font-medium transition-all duration-300 text-land-muted hover:text-land-dark">
+                    <i class="fa-solid fa-graduation-cap mr-1.5"></i>課程介紹
+                </button>
+            </nav>
+
+            <!-- 行動端選單按鈕 -->
+            <div class="md:hidden">
+                <button onclick="toggleMobileMenu()" class="p-2.5 rounded-lg bg-land-card border border-land-gold/30 text-land-dark hover:bg-land-gold/10 transition-colors">
+                    <i class="fa-solid fa-bars text-lg"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- 行動端下拉選單 -->
+        <div id="mobile-menu" class="hidden md:hidden border-b border-land-gold/20 bg-land-bg px-4 pt-2 pb-4 space-y-2">
+            <button onclick="switchPage('home'); toggleMobileMenu()" class="w-full text-left px-4 py-2.5 rounded-lg text-sm font-medium bg-land-card border border-land-gold/20 flex items-center justify-between">
+                <span><i class="fa-solid fa-house mr-2 text-land-gold"></i>首頁與團隊</span>
+                <i class="fa-solid fa-chevron-right text-xs text-land-muted"></i>
+            </button>
+            <button onclick="switchPage('projects'); toggleMobileMenu()" class="w-full text-left px-4 py-2.5 rounded-lg text-sm font-medium bg-land-card border border-land-gold/20 flex items-center justify-between">
+                <span><i class="fa-solid fa-cubes mr-2 text-land-gold"></i>作品介紹</span>
+                <i class="fa-solid fa-chevron-right text-xs text-land-muted"></i>
+            </button>
+            <button onclick="switchPage('course'); toggleMobileMenu()" class="w-full text-left px-4 py-2.5 rounded-lg text-sm font-medium bg-land-card border border-land-gold/20 flex items-center justify-between">
+                <span><i class="fa-solid fa-graduation-cap mr-2 text-land-gold"></i>課程介紹</span>
+                <i class="fa-solid fa-chevron-right text-xs text-land-muted"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- 主要內容區 Main Area -->
+    <main class="flex-grow">
+
+        <!-- ================= 首頁與團隊 (Home View) ================= -->
+        <section id="page-home" class="page-transition">
+            <!-- Hero Banner -->
+            <div class="relative py-16 sm:py-24 art-grid border-b border-land-gold/15">
+                <div class="max-w-4xl mx-auto px-4 sm:px-6 text-center relative z-10">
+                    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-land-gold/15 border border-land-gold/30 text-land-gold text-xs font-mono font-medium mb-6">
+                        <i class="fa-solid fa-sparkles"></i> 數位工藝與創意程式展覽
+                    </div>
+                    <h2 class="font-serif text-5xl sm:text-7xl font-black text-land-dark tracking-widest leading-tight mb-6">
+                        <span class="bg-gradient-to-r from-land-dark via-land-gold to-land-slate bg-clip-text text-transparent inline-block transform hover:scale-105 transition-transform duration-500" style="font-family: 'Noto Serif TC', serif; font-weight: 900;">
+                            程式大選修
+                        </span>
+                    </h2>
+                    
+                    <p class="max-w-2xl mx-auto text-base sm:text-lg text-land-dark/90 leading-relaxed font-serif font-medium mb-10">
+                        我們是一群國中生，由老師指導，並使用 AI 輔助完成屬於自己的程式設計專案。從邏輯思維到視覺介面，探索資訊科技的無限可能。
+                    </p>
+
+                    <div class="flex flex-wrap justify-center gap-4">
+                        <button onclick="switchPage('projects')" class="px-8 py-3.5 rounded-full bg-land-dark text-land-gold font-medium text-sm sm:text-base hover:bg-land-slate transition-all shadow-land-hover flex items-center gap-2 group border border-land-gold/30">
+                            <span>瀏覽作品展覽</span>
+                            <i class="fa-solid fa-arrow-right text-xs group-hover:translate-x-1 transition-transform"></i>
+                        </button>
+                        <button onclick="switchPage('course')" class="px-8 py-3.5 rounded-full bg-white/80 border border-land-gold/50 text-land-dark font-medium text-sm sm:text-base hover:bg-land-gold/10 transition-all flex items-center gap-2 shadow-sm">
+                            <span>課程地圖</span>
+                            <i class="fa-solid fa-compass text-xs text-land-gold"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 團隊成員與指導老師 -->
+            <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+                
+                <!-- 指導老師區塊 -->
+                <div class="mb-14 text-center">
+                    <div class="max-w-xl mx-auto mb-6">
+                        <span class="text-xs font-mono tracking-widest text-land-gold uppercase font-semibold">Instructor</span>
+                        <h3 class="font-serif text-2xl sm:text-3xl font-bold text-land-dark mt-1">指導老師</h3>
+                        <div class="w-12 h-0.5 bg-land-gold mx-auto mt-2"></div>
+                    </div>
+                    <div class="inline-flex items-center justify-center">
+                        <div class="paper-card rounded-2xl px-10 py-5 text-center art-border shadow-md flex items-center gap-4 hover:border-land-gold transition-all duration-300 transform hover:-translate-y-0.5">
+                            <div class="w-12 h-12 rounded-full bg-land-dark text-land-gold flex items-center justify-center font-bold text-lg shadow-sm">
+                                <i class="fa-solid fa-chalkboard-user"></i>
+                            </div>
+                            <div class="text-left">
+                                <span class="font-serif font-bold text-lg text-land-dark tracking-wide block">Bogay</span>
+                                <span class="text-xs text-land-gold font-medium block">指導老師</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 學生組員區塊 -->
+                <div class="mb-14">
+                    <div class="text-center max-w-xl mx-auto mb-8">
+                        <span class="text-xs font-mono tracking-widest text-land-gold uppercase font-semibold">Team Members</span>
+                        <h3 class="font-serif text-2xl sm:text-3xl font-bold text-land-dark mt-1">專案組員</h3>
+                        <div class="w-12 h-0.5 bg-land-gold mx-auto mt-2"></div>
+                    </div>
+
+                    <!-- 7 位學生 卡片陣列 -->
+                    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+                        <div onclick="showMemberInfo('徐愷', '負責前端畫布邏輯與傳統墨跡互動視覺開發。')" class="paper-card rounded-2xl p-4 text-center art-border shadow-sm flex flex-col items-center justify-center gap-2.5 hover:border-land-gold hover:bg-white cursor-pointer transition-all duration-300 group">
+                            <div class="w-10 h-10 rounded-full bg-land-dark/10 group-hover:bg-land-dark text-land-gold flex items-center justify-center transition-colors">
+                                <i class="fa-solid fa-user-code text-sm"></i>
+                            </div>
+                            <span class="font-serif font-bold text-base text-land-dark tracking-wide">徐愷</span>
+                        </div>
+                        <div onclick="showMemberInfo('陳朝元', '負責數學筆觸演算法設計與動態擴散特效。')" class="paper-card rounded-2xl p-4 text-center art-border shadow-sm flex flex-col items-center justify-center gap-2.5 hover:border-land-gold hover:bg-white cursor-pointer transition-all duration-300 group">
+                            <div class="w-10 h-10 rounded-full bg-land-dark/10 group-hover:bg-land-dark text-land-gold flex items-center justify-center transition-colors">
+                                <i class="fa-solid fa-user-code text-sm"></i>
+                            </div>
+                            <span class="font-serif font-bold text-base text-land-dark tracking-wide">陳朝元</span>
+                        </div>
+                        <div onclick="showMemberInfo('Pig', '負責 AI 時間規劃模組邏輯構想與流程優化。')" class="paper-card rounded-2xl p-4 text-center art-border shadow-sm flex flex-col items-center justify-center gap-2.5 hover:border-land-gold hover:bg-white cursor-pointer transition-all duration-300 group">
+                            <div class="w-10 h-10 rounded-full bg-land-dark/10 group-hover:bg-land-dark text-land-gold flex items-center justify-center transition-colors">
+                                <i class="fa-solid fa-user-code text-sm"></i>
+                            </div>
+                            <span class="font-serif font-bold text-base text-land-dark tracking-wide">Pig</span>
+                        </div>
+                        <div onclick="showMemberInfo('殷睿紳', '負責介面排版與使用者任務時間卡片設計。')" class="paper-card rounded-2xl p-4 text-center art-border shadow-sm flex flex-col items-center justify-center gap-2.5 hover:border-land-gold hover:bg-white cursor-pointer transition-all duration-300 group">
+                            <div class="w-10 h-10 rounded-full bg-land-dark/10 group-hover:bg-land-dark text-land-gold flex items-center justify-center transition-colors">
+                                <i class="fa-solid fa-user-code text-sm"></i>
+                            </div>
+                            <span class="font-serif font-bold text-base text-land-dark tracking-wide">殷睿紳</span>
+                        </div>
+                        <div onclick="showMemberInfo('李昊恩', '負責遊戲邏輯與地圖關卡機制編程。')" class="paper-card rounded-2xl p-4 text-center art-border shadow-sm flex flex-col items-center justify-center gap-2.5 hover:border-land-gold hover:bg-white cursor-pointer transition-all duration-300 group">
+                            <div class="w-10 h-10 rounded-full bg-land-dark/10 group-hover:bg-land-dark text-land-gold flex items-center justify-center transition-colors">
+                                <i class="fa-solid fa-user-code text-sm"></i>
+                            </div>
+                            <span class="font-serif font-bold text-base text-land-dark tracking-wide">李昊恩</span>
+                        </div>
+                        <div onclick="showMemberInfo('小蝎', '負責復古像素繪圖與音樂氛圍視覺設計。')" class="paper-card rounded-2xl p-4 text-center art-border shadow-sm flex flex-col items-center justify-center gap-2.5 hover:border-land-gold hover:bg-white cursor-pointer transition-all duration-300 group">
+                            <div class="w-10 h-10 rounded-full bg-land-dark/10 group-hover:bg-land-dark text-land-gold flex items-center justify-center transition-colors">
+                                <i class="fa-solid fa-user-code text-sm"></i>
+                            </div>
+                            <span class="font-serif font-bold text-base text-land-dark tracking-wide">小蝎</span>
+                        </div>
+                        <div onclick="showMemberInfo('李宥嫻', '負責聲控音量檢測與物理彈珠對撞開發。')" class="paper-card rounded-2xl p-4 text-center art-border shadow-sm flex flex-col items-center justify-center gap-2.5 hover:border-land-gold hover:bg-white cursor-pointer transition-all duration-300 col-span-2 sm:col-span-1 group">
+                            <div class="w-10 h-10 rounded-full bg-land-dark/10 group-hover:bg-land-dark text-land-gold flex items-center justify-center transition-colors">
+                                <i class="fa-solid fa-user-code text-sm"></i>
+                            </div>
+                            <span class="font-serif font-bold text-base text-land-dark tracking-wide">李宥嫻</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ================= 作品介紹 (Project Showcase Page View) ================= -->
+        <section id="page-projects" class="page-transition hidden min-h-screen py-12">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 pb-6 border-b border-land-gold/20 gap-6">
+                    <div>
+                        <span class="text-xs font-mono tracking-widest text-land-gold uppercase font-semibold">Exhibition Showcase</span>
+                        <h2 class="font-serif text-3xl sm:text-4xl font-bold text-land-dark mt-1">成果作品展示</h2>
+                        <p class="text-land-muted text-sm mt-1">點擊「查看更多」可查看作品詳細說明並使用線上語音導覽</p>
+                    </div>
+
+                    <!-- 篩選器 (展示網站、生活工具、趣味遊戲) -->
+                    <div class="flex flex-wrap gap-2">
+                        <button onclick="filterProjects('all')" id="filter-all" class="filter-btn active px-4 py-1.5 rounded-full text-xs font-medium border border-land-gold transition-all bg-land-dark text-land-gold shadow-sm">
+                            全部作品
+                        </button>
+                        <button onclick="filterProjects('site')" id="filter-site" class="filter-btn px-4 py-1.5 rounded-full text-xs font-medium border border-land-gold/30 hover:border-land-gold text-land-dark transition-all">
+                            展示網站
+                        </button>
+                        <button onclick="filterProjects('tool')" id="filter-tool" class="filter-btn px-4 py-1.5 rounded-full text-xs font-medium border border-land-gold/30 hover:border-land-gold text-land-dark transition-all">
+                            生活工具
+                        </button>
+                        <button onclick="filterProjects('game')" id="filter-game" class="filter-btn px-4 py-1.5 rounded-full text-xs font-medium border border-land-gold/30 hover:border-land-gold text-land-dark transition-all">
+                            趣味遊戲
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 作品列表 Grid -->
+                <div id="projects-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- 作品 1 -->
+                    <div class="project-card paper-card rounded-2xl overflow-hidden shadow-land hover:shadow-land-hover transition-all duration-300 art-border flex flex-col" data-category="site">
+                        <div class="relative h-48 overflow-hidden bg-land-dark">
+                            <img src="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=800&q=80" alt="墨韻" class="w-full h-full object-cover opacity-90 hover:scale-105 transition-transform duration-500" onerror="this.src='https://placehold.co/800x600/1A3029/B58E52?text=Showcase+Site'">
+                            <span class="absolute top-3 right-3 text-[10px] font-mono px-2.5 py-0.5 rounded-full bg-land-dark/90 text-land-gold border border-land-gold/40">展示網站</span>
+                        </div>
+                        <div class="p-6 flex-grow flex flex-col justify-between">
+                            <div>
+                                <h3 class="font-serif font-bold text-lg text-land-dark mb-1">墨韻：數位書法展示網頁</h3>
+                                <p class="text-xs text-land-gold font-semibold font-mono mb-3"><i class="fa-solid fa-pen-nib mr-1"></i>創作人：徐愷、陳朝元</p>
+                                <p class="text-xs text-land-muted leading-relaxed line-clamp-3 mb-4">
+                                    結合 HTML5 Canvas 與動態演算法，模擬毛筆墨跡筆觸與宣紙擴散效果。體驗東方傳統書法創作寫意。
+                                </p>
+                            </div>
+                            <button onclick="openProjectModal(0)" class="w-full py-2.5 px-4 rounded-xl bg-land-dark text-land-gold text-xs font-medium hover:bg-land-slate transition-all flex items-center justify-center gap-2 shadow-sm">
+                                <i class="fa-solid fa-circle-info text-xs"></i>
+                                <span>查看更多</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- 作品 2 -->
+                    <div class="project-card paper-card rounded-2xl overflow-hidden shadow-land hover:shadow-land-hover transition-all duration-300 art-border flex flex-col" data-category="tool">
+                        <div class="relative h-48 overflow-hidden bg-land-dark">
+                            <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=800&q=80" alt="生活助手" class="w-full h-full object-cover opacity-90 hover:scale-105 transition-transform duration-500" onerror="this.src='https://placehold.co/800x600/1A3029/B58E52?text=Life+Tool'">
+                            <span class="absolute top-3 right-3 text-[10px] font-mono px-2.5 py-0.5 rounded-full bg-land-dark/90 text-land-gold border border-land-gold/40">生活工具</span>
+                        </div>
+                        <div class="p-6 flex-grow flex flex-col justify-between">
+                            <div>
+                                <h3 class="font-serif font-bold text-lg text-land-dark mb-1">智生活：AI 學習進度規劃器</h3>
+                                <p class="text-xs text-land-gold font-semibold font-mono mb-3"><i class="fa-solid fa-pen-nib mr-1"></i>創作人：Pig、殷睿紳</p>
+                                <p class="text-xs text-land-muted leading-relaxed line-clamp-3 mb-4">
+                                    利用語言模型為國中生量身打造個人化學習日曆與時間管理小幫手，提升每日自主學習效率。
+                                </p>
+                            </div>
+                            <button onclick="openProjectModal(1)" class="w-full py-2.5 px-4 rounded-xl bg-land-dark text-land-gold text-xs font-medium hover:bg-land-slate transition-all flex items-center justify-center gap-2 shadow-sm">
+                                <i class="fa-solid fa-circle-info text-xs"></i>
+                                <span>查看更多</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- 作品 3 -->
+                    <div class="project-card paper-card rounded-2xl overflow-hidden shadow-land hover:shadow-land-hover transition-all duration-300 art-border flex flex-col" data-category="game">
+                        <div class="relative h-48 overflow-hidden bg-land-dark">
+                            <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=800&q=80" alt="解謎遊戲" class="w-full h-full object-cover opacity-90 hover:scale-105 transition-transform duration-500" onerror="this.src='https://placehold.co/800x600/1A3029/B58E52?text=Fun+Game'">
+                            <span class="absolute top-3 right-3 text-[10px] font-mono px-2.5 py-0.5 rounded-full bg-land-dark/90 text-land-gold border border-land-gold/40">趣味遊戲</span>
+                        </div>
+                        <div class="p-6 flex-grow flex flex-col justify-between">
+                            <div>
+                                <h3 class="font-serif font-bold text-lg text-land-dark mb-1">鐘樓迴響：復古風時空解謎</h3>
+                                <p class="text-xs text-land-gold font-semibold font-mono mb-3"><i class="fa-solid fa-pen-nib mr-1"></i>創作人：李昊恩、小蝎</p>
+                                <p class="text-xs text-land-muted leading-relaxed line-clamp-3 mb-4">
+                                    結合像素美術與古典交響樂音效的雙人合作解謎遊戲。玩家操控掌控時間與空間的主角尋找解謎密碼。
+                                </p>
+                            </div>
+                            <button onclick="openProjectModal(2)" class="w-full py-2.5 px-4 rounded-xl bg-land-dark text-land-gold text-xs font-medium hover:bg-land-slate transition-all flex items-center justify-center gap-2 shadow-sm">
+                                <i class="fa-solid fa-circle-info text-xs"></i>
+                                <span>查看更多</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- 作品 4 -->
+                    <div class="project-card paper-card rounded-2xl overflow-hidden shadow-land hover:shadow-land-hover transition-all duration-300 art-border flex flex-col" data-category="game">
+                        <div class="relative h-48 overflow-hidden bg-land-dark">
+                            <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80" alt="聲控遊戲" class="w-full h-full object-cover opacity-90 hover:scale-105 transition-transform duration-500" onerror="this.src='https://placehold.co/800x600/1A3029/B58E52?text=Interactive+Game'">
+                            <span class="absolute top-3 right-3 text-[10px] font-mono px-2.5 py-0.5 rounded-full bg-land-dark/90 text-land-gold border border-land-gold/40">趣味遊戲</span>
+                        </div>
+                        <div class="p-6 flex-grow flex flex-col justify-between">
+                            <div>
+                                <h3 class="font-serif font-bold text-lg text-land-dark mb-1">光雕大冒險：聲控彈珠臺</h3>
+                                <p class="text-xs text-land-gold font-semibold font-mono mb-3"><i class="fa-solid fa-pen-nib mr-1"></i>創作人：李宥嫻</p>
+                                <p class="text-xs text-land-muted leading-relaxed line-clamp-3 mb-4">
+                                    運用麥克風音量與物理引擎相結合的趣味互動彈珠遊戲，玩家可以用聲音喊叫來給予彈珠額外推力！
+                                </p>
+                            </div>
+                            <button onclick="openProjectModal(3)" class="w-full py-2.5 px-4 rounded-xl bg-land-dark text-land-gold text-xs font-medium hover:bg-land-slate transition-all flex items-center justify-center gap-2 shadow-sm">
+                                <i class="fa-solid fa-circle-info text-xs"></i>
+                                <span>查看更多</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- 作品詳情與語音導覽 Modal (查看更多彈出視窗) -->
+        <div id="project-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm transition-opacity">
+            <div class="paper-card rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-y-auto art-border shadow-2xl relative p-6 sm:p-8 animate-fadeIn">
+                <!-- 關閉按鈕 -->
+                <button onclick="closeProjectModal()" class="absolute top-5 right-5 w-9 h-9 rounded-full bg-land-dark/10 hover:bg-land-dark hover:text-land-gold transition-all text-land-dark flex items-center justify-center">
+                    <i class="fa-solid fa-xmark text-base"></i>
+                </button>
+
+                <!-- Modal 內容 -->
+                <div class="mb-6">
+                    <span id="modal-tag" class="text-[11px] font-mono px-3 py-1 rounded-full bg-land-gold/15 text-land-gold border border-land-gold/30 font-semibold">展示網站</span>
+                    <h3 id="modal-title" class="font-serif font-bold text-2xl sm:text-3xl text-land-dark mt-3">作品名稱</h3>
+                    <p id="modal-author" class="text-xs text-land-gold font-semibold font-mono mt-1">創作人：團隊成員</p>
+                </div>
+
+                <div class="relative h-56 sm:h-64 rounded-2xl overflow-hidden mb-6 bg-land-dark art-border">
+                    <img id="modal-img" src="" alt="作品大圖" class="w-full h-full object-cover">
+                </div>
+
+                <div class="mb-6">
+                    <h4 class="font-serif font-bold text-base text-land-dark mb-2">作品詳細介紹</h4>
+                    <p id="modal-desc" class="text-xs sm:text-sm text-land-dark/80 leading-relaxed font-sans">
+                        詳細說明內容...
+                    </p>
+                </div>
+
+                <!-- 專屬語音導覽控制區塊 (含播放、暫停、停止按鈕) -->
+                <div class="bg-land-dark text-land-bg rounded-2xl p-5 border border-land-gold/40 shadow-md">
+                    <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+                        <div class="flex items-center gap-3 w-full sm:w-auto">
+                            <div class="w-10 h-10 rounded-xl bg-land-gold/20 flex items-center justify-center border border-land-gold/40 flex-shrink-0">
+                                <i class="fa-solid fa-headphones text-land-gold text-lg"></i>
+                            </div>
+                            <div>
+                                <h5 class="font-serif font-bold text-sm text-land-gold">專案線上語音導覽</h5>
+                                <p id="speech-status-text" class="text-[11px] text-gray-400">點擊播放鍵開始語音朗讀</p>
+                            </div>
+                        </div>
+
+                        <!-- 語音波紋視覺 -->
+                        <div id="modal-audio-wave" class="hidden flex items-center gap-1 h-5 px-3 bg-black/40 rounded-lg border border-white/10">
+                            <div class="w-1 bg-land-gold rounded-full animate-wave-1"></div>
+                            <div class="w-1 bg-land-gold rounded-full animate-wave-2"></div>
+                            <div class="w-1 bg-land-gold rounded-full animate-wave-3"></div>
+                            <div class="w-1 bg-land-gold rounded-full animate-wave-4"></div>
+                        </div>
+
+                        <!-- 控制按鈕組：播放、暫停、停止 -->
+                        <div class="flex items-center gap-2 w-full sm:w-auto justify-end">
+                            <button id="btn-play-speech" onclick="startCurrentSpeech()" class="px-4 py-2 rounded-xl bg-land-gold text-land-dark font-bold text-xs hover:bg-land-goldhover transition-all flex items-center gap-1.5 shadow-sm">
+                                <i class="fa-solid fa-play text-xs"></i> 播放
+                            </button>
+                            <button id="btn-pause-speech" onclick="toggleSpeechPause()" class="px-3.5 py-2 rounded-xl bg-white/10 text-white font-medium text-xs hover:bg-white/20 transition-all flex items-center gap-1.5 border border-white/20">
+                                <i class="fa-solid fa-pause text-xs"></i> 暫停
+                            </button>
+                            <button onclick="stopSpeech()" class="px-3.5 py-2 rounded-xl bg-red-900/50 text-red-200 border border-red-500/30 text-xs hover:bg-red-900/70 transition-all flex items-center gap-1.5">
+                                <i class="fa-solid fa-stop text-xs"></i> 停止
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= 課程介紹 (Course Showcase Page View) ================= -->
+        <section id="page-course" class="page-transition hidden min-h-screen py-12">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <span class="text-xs font-mono tracking-widest text-land-gold uppercase font-semibold">Curriculum Roadmap</span>
+                    <h2 class="font-serif text-3xl sm:text-5xl font-bold text-land-dark mt-2">程式大選修 - 課程地圖</h2>
+                    <div class="w-20 h-0.5 bg-land-gold mx-auto mt-4"></div>
+                    <p class="text-land-muted text-sm mt-4 leading-relaxed">
+                        結合邏輯思維與實踐開發。學生在學期中經歷四大模組訓練，建立邏輯架構與自主學習專案能力。
+                    </p>
+                </div>
+
+                <!-- 核心四大學習模組 -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="paper-card p-6 rounded-2xl art-border text-center shadow-land hover:shadow-land-hover transition-all">
+                        <div class="w-12 h-12 bg-land-dark text-land-gold rounded-xl mx-auto flex items-center justify-center text-lg mb-4 shadow-md">
+                            <i class="fa-solid fa-code"></i>
+                        </div>
+                        <h3 class="font-serif font-bold text-base text-land-dark">Mod 1: 程式基礎與邏輯</h3>
+                        <p class="text-xs text-land-muted mt-2 leading-relaxed">學習控制流程、條件判斷與演算法邏輯思維訓練。</p>
+                    </div>
+
+                    <div class="paper-card p-6 rounded-2xl art-border text-center shadow-land hover:shadow-land-hover transition-all">
+                        <div class="w-12 h-12 bg-land-dark text-land-gold rounded-xl mx-auto flex items-center justify-center text-lg mb-4 shadow-md">
+                            <i class="fa-solid fa-palette"></i>
+                        </div>
+                        <h3 class="font-serif font-bold text-base text-land-dark">Mod 2: 現代網頁與美學</h3>
+                        <p class="text-xs text-land-muted mt-2 leading-relaxed">學習 HTML/CSS/Tailwind UI 視覺規範與響應式介面設計。</p>
+                    </div>
+
+                    <div class="paper-card p-6 rounded-2xl art-border text-center shadow-land hover:shadow-land-hover transition-all">
+                        <div class="w-12 h-12 bg-land-dark text-land-gold rounded-xl mx-auto flex items-center justify-center text-lg mb-4 shadow-md">
+                            <i class="fa-solid fa-robot"></i>
+                        </div>
+                        <h3 class="font-serif font-bold text-base text-land-dark">Mod 3: AI 協作開發</h3>
+                        <p class="text-xs text-land-muted mt-2 leading-relaxed">運用 Prompt Engineering 與大型語言模型進行程式除錯與程式碼生成。</p>
+                    </div>
+
+                    <div class="paper-card p-6 rounded-2xl art-border text-center shadow-land hover:shadow-land-hover transition-all">
+                        <div class="w-12 h-12 bg-land-dark text-land-gold rounded-xl mx-auto flex items-center justify-center text-lg mb-4 shadow-md">
+                            <i class="fa-solid fa-bullhorn"></i>
+                        </div>
+                        <h3 class="font-serif font-bold text-base text-land-dark">Mod 4: 成果發表與展示</h3>
+                        <p class="text-xs text-land-muted mt-2 leading-relaxed">完成專案部署、簡報提報與互動展示網頁搭建。</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- 頁尾 Footer -->
+    <footer class="bg-land-dark text-land-bg border-t border-land-gold/30 mt-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div class="flex items-center space-x-3">
+                <div class="w-8 h-8 rounded bg-land-gold/20 flex items-center justify-center text-land-gold text-xs font-mono font-bold border border-land-gold/40">
+                    &lt;/&gt;
+                </div>
+                <span class="font-serif font-bold text-sm text-land-gold tracking-wide">程式大選修</span>
+            </div>
+            <p class="text-xs text-gray-400 font-mono">
+                &copy; 程式大選修
+            </p>
+        </div>
+    </footer>
+
+    <!-- JavaScript 邏輯控制與 Speech Audio Guide -->
+    <script>
+        // 專案資料庫 (包含語音導覽內容)
+        const projectsData = [
+            {
+                title: "墨韻：數位書法展示網頁",
+                author: "徐愷、陳朝元",
+                category: "site",
+                tag: "展示網站",
+                image: "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=800&q=80",
+                description: "《墨韻》這項作品結合了 HTML5 Canvas 畫布技術與動態演算法，精細模擬毛筆的水墨濃淡、擴散與飛白筆觸效果。使用者可以在數位平台上揮毫創作，感受東方傳統書法的寫意之美與當代資訊科技的交融。"
+            },
+            {
+                title: "智生活：AI 學習進度規劃器",
+                author: "Pig、殷睿紳",
+                category: "tool",
+                tag: "生活工具",
+                image: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=800&q=80",
+                description: "《智生活》是一款專為學生設計的自主學習輔助工具。整合生成式 AI 與目標分解演算法，協助學生根據個人考程與學習進度自動調整每日讀書計畫，並具備即時專注計時與學習成就圖表回饋。"
+            },
+            {
+                title: "鐘樓迴響：復古風時空解謎",
+                author: "李昊恩、小蝎",
+                category: "game",
+                tag: "趣味遊戲",
+                image: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=800&q=80",
+                description: "《鐘樓迴響》是一副採用古典雙色像素風格打造的解謎遊戲。玩家將扮演掌控時間與空間鑰匙的探險家，在悠揚的古典交響樂與時鐘滴答聲中，解開層層機關，探索古老鐘樓背後被封印的秘密。"
+            },
+            {
+                title: "光雕大冒險：聲控彈珠臺",
+                author: "李宥嫻",
+                category: "game",
+                tag: "趣味遊戲",
+                image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80",
+                description: "《光雕大冒險》運用裝置麥克風音量偵測與物理引擎碰撞技術，創作出新型態的聲控彈珠遊戲。玩家不僅能利用按鈕發射，還能對著麥克風吶喊發聲，給予彈珠瞬間的加速與光雕特效推進！"
+            }
+        ];
+
+        let currentModalIndex = null;
+        let synth = window.speechSynthesis;
+        let currentUtterance = null;
+        let isPaused = false;
+
+        // 頁面切換機制
+        function switchPage(pageId) {
+            const pages = ['home', 'projects', 'course'];
+            pages.forEach(p => {
+                const pageEl = document.getElementById(`page-${p}`);
+                const navBtn = document.getElementById(`nav-${p}`);
+                if (p === pageId) {
+                    pageEl.classList.remove('hidden');
+                    if (navBtn) {
+                        navBtn.className = "nav-btn px-5 py-2 rounded-full text-xs font-medium transition-all duration-300 bg-land-dark text-land-gold shadow-sm";
+                    }
+                } else {
+                    pageEl.classList.add('hidden');
+                    if (navBtn) {
+                        navBtn.className = "nav-btn px-5 py-2 rounded-full text-xs font-medium transition-all duration-300 text-land-muted hover:text-land-dark";
+                    }
+                }
+            });
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // 行動端選單開關
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        // 作品類別篩選
+        function filterProjects(category) {
+            const cards = document.querySelectorAll('.project-card');
+            const buttons = document.querySelectorAll('.filter-btn');
+
+            buttons.forEach(btn => {
+                btn.className = "filter-btn px-4 py-1.5 rounded-full text-xs font-medium border border-land-gold/30 hover:border-land-gold text-land-dark transition-all";
+            });
+
+            const activeBtn = document.getElementById(`filter-${category}`);
+            if (activeBtn) {
+                activeBtn.className = "filter-btn active px-4 py-1.5 rounded-full text-xs font-medium border border-land-gold transition-all bg-land-dark text-land-gold shadow-sm";
+            }
+
+            cards.forEach(card => {
+                if (category === 'all' || card.getAttribute('data-category') === category) {
+                    card.classList.remove('hidden');
+                } else {
+                    card.classList.add('hidden');
+                }
+            });
+        }
+
+        // 打開作品詳情 Modal
+        function openProjectModal(index) {
+            currentModalIndex = index;
+            const project = projectsData[index];
+            
+            document.getElementById('modal-tag').textContent = project.tag;
+            document.getElementById('modal-title').textContent = project.title;
+            document.getElementById('modal-author').textContent = `創作人：${project.author}`;
+            document.getElementById('modal-desc').textContent = project.description;
+            
+            const imgEl = document.getElementById('modal-img');
+            imgEl.src = project.image;
+            imgEl.onerror = function() {
+                this.src = `https://placehold.co/800x600/1A3029/B58E52?text=${encodeURIComponent(project.title)}`;
+            };
+
+            stopSpeech(); // 開啟新視窗時暫停先前語音
+            document.getElementById('project-modal').classList.remove('hidden');
+        }
+
+        // 關閉 Modal
+        function closeProjectModal() {
+            stopSpeech();
+            document.getElementById('project-modal').classList.add('hidden');
+        }
+
+        // 組員對話提示 Modal
+        function showMemberInfo(name, role) {
+            const messageBox = document.createElement('div');
+            messageBox.className = "fixed bottom-8 right-8 z-50 paper-card p-4 rounded-xl border border-land-gold text-land-dark shadow-2xl flex items-center gap-3 animate-fadeIn max-w-xs";
+            messageBox.innerHTML = `
+                <div class="w-9 h-9 rounded-full bg-land-dark text-land-gold flex items-center justify-center font-bold text-xs flex-shrink-0">
+                    <i class="fa-solid fa-user-astronaut"></i>
+                </div>
+                <div>
+                    <h5 class="font-bold text-xs text-land-dark">${name}</h5>
+                    <p class="text-[11px] text-land-muted mt-0.5">${role}</p>
+                </div>
+            `;
+            document.body.appendChild(messageBox);
+            setTimeout(() => {
+                messageBox.style.opacity = '0';
+                messageBox.style.transition = 'opacity 0.5s ease';
+                setTimeout(() => messageBox.remove(), 500);
+            }, 3000);
+        }
+
+        // ================= 語音導覽功能 (Web Speech API) =================
+        function startCurrentSpeech() {
+            if (currentModalIndex === null) return;
+
+            if (synth.paused && isPaused) {
+                synth.resume();
+                isPaused = false;
+                updateSpeechUI(true, "朗讀中...");
+                return;
+            }
+
+            synth.cancel(); // 停止所有之前正在進行的語音
+
+            const project = projectsData[currentModalIndex];
+            const textToRead = `${project.title}。創作團隊：${project.author}。${project.description}`;
+            
+            currentUtterance = new SpeechSynthesisUtterance(textToRead);
+            currentUtterance.lang = 'zh-TW';
+            currentUtterance.rate = 0.95;
+
+            currentUtterance.onstart = function () {
+                isPaused = false;
+                updateSpeechUI(true, "語音朗讀中...");
+            };
+
+            currentUtterance.onend = function () {
+                isPaused = false;
+                updateSpeechUI(false, "朗讀完成");
+            };
+
+            currentUtterance.onerror = function () {
+                isPaused = false;
+                updateSpeechUI(false, "語音播放發生錯誤");
+            };
+
+            synth.speak(currentUtterance);
+        }
+
+        function toggleSpeechPause() {
+            if (synth.speaking && !synth.paused) {
+                synth.pause();
+                isPaused = true;
+                updateSpeechUI(false, "已暫停朗讀");
+            } else if (synth.paused) {
+                synth.resume();
+                isPaused = false;
+                updateSpeechUI(true, "繼續朗讀中...");
+            }
+        }
+
+        function stopSpeech() {
+            if (synth) {
+                synth.cancel();
+                isPaused = false;
+                updateSpeechUI(false, "點擊播放鍵開始語音朗讀");
+            }
+        }
+
+        function updateSpeechUI(isPlaying, statusText) {
+            const waveEl = document.getElementById('modal-audio-wave');
+            const statusEl = document.getElementById('speech-status-text');
+            const btnPlay = document.getElementById('btn-play-speech');
+
+            if (statusEl) statusEl.textContent = statusText;
+
+            if (isPlaying) {
+                if (waveEl) waveEl.classList.remove('hidden');
+                if (btnPlay) btnPlay.classList.add('bg-land-slate');
+            } else {
+                if (waveEl) waveEl.classList.add('hidden');
+                if (btnPlay) btnPlay.classList.remove('bg-land-slate');
+            }
+        }
+    </script>
+</body>
+</html>
